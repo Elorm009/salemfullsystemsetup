@@ -324,9 +324,43 @@
 .sn{width:22px;height:22px;border-radius:50%;background:var(--color-background-secondary);border:0.5px solid var(--color-border-secondary);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--color-text-secondary);flex-shrink:0;margin-top:1px;}
 
 .iem-lvl{font-weight:500;}
+
+.csb-root .obs-tab .sl{color:#0D9488;}
+.csb-root .freeshow-tab .sl{color:#B45309;}
+.csb-root .freeshow-tab .card{border-left:3px solid #D97706;}
+.csb-root .freeshow-tab .rt th{background:#FFFBEB;color:#92400E;}
+.csb-root .freeshow-banner{background:linear-gradient(135deg,#D97706,#F59E0B);color:#fff;padding:13px 18px;border-radius:12px;margin:0 0 1.5rem;font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:10px;}
+.csb-root .obs-tab .card{border-left:3px solid #0D9488;}
+.csb-root .obs-tab .rt th{background:#F0FDFA;color:#0F766E;}
+.csb-root .obs-banner{background:linear-gradient(135deg,#0D9488,#0891B2);color:#fff;padding:13px 18px;border-radius:12px;margin:0 0 1.5rem;font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:10px;}
+.csb-root .obs-flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0;}
+.csb-root .obs-node{background:#F0FDFA;border:1px solid #99F6E4;border-radius:8px;padding:9px 12px;font-size:12px;text-align:center;color:#134E4A;}
+.csb-root .obs-node.sw{background:#EFF6FF;border-color:#BFDBFE;color:#1E3A8A;}
+.csb-root .obs-arrow{color:#0D9488;font-size:16px;font-weight:700;}
+.csb-root .group-nav{display:flex;gap:10px;margin-bottom:16px;}
+.csb-root .gnb{
+  flex:1;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:14px;font-weight:700;letter-spacing:0.04em;
+  padding:14px 20px;
+  border-radius:12px;
+  border:2px solid var(--color-border-secondary);
+  background:#FAFBFC;
+  color:#6B7280;
+  cursor:pointer;
+  transition:all 0.15s;
+  text-align:center;
+}
+.csb-root .gnb:hover{border-color:#9CA3AF;color:#374151;}
+.csb-root .gnb[data-g="sound"].active{background:#EFF6FF;border-color:#2563EB;color:#1D4ED8;}
+.csb-root .gnb[data-g="integration"].active{background:#F5F3FF;border-color:#7C3AED;color:#6D28D9;}
+.csb-root .gnb[data-g="obs"].active{background:#F0FDFA;border-color:#0D9488;color:#0F766E;}
+.csb-root .gnb[data-g="freeshow"].active{background:#FFFBEB;border-color:#D97706;color:#B45309;}
+@media (max-width:640px){.csb-root .gnb{font-size:12px;padding:11px 8px;}}
 </style>
 
 <div class="csb-root">
+<div class="group-nav" id="groupNav"></div>
 <div class="nav" id="nav"></div>
 <div id="views"></div>
 </div>
@@ -700,65 +734,119 @@ const IEM_STATIC=[
 ];
 
 const SECTIONS=[
-  {id:'start',label:'👋 Start here'},
-  {id:'consolemap',label:'🖥️ Console Map'},
-  {id:'overview',label:'🗺️ Overview'},
-  {id:'rack',label:'🏗️ Rack'},
-  {id:'local',label:'🎚️ Inputs IN1–24'},
-  {id:'sd16',label:'📦 SD16 IN25–40'},
-  {id:'outputs',label:'🔊 Outputs'},
-  {id:'buses',label:'🔀 Buses + AUX'},
-  {id:'talkback',label:'🎙️ Talkback'},
-  {id:'gain',label:'📈 Gain staging — do this FIRST'},
-  {id:'sends',label:'📊 Send levels'},
-  {id:'panning',label:'🎯 Panning'},
-  {id:'concept',label:'📖 IEM: The concept'},
-  {id:'wing_setup',label:'⚙️ IEM: WING setup steps'},
-  {id:'drummer',label:'🥁 B9 Drummer IEM'},
-  {id:'bass',label:'🎸 B10 Bass IEM'},
-  {id:'keys1',label:'🎹 B11–12 Keys 1 IEM'},
-  {id:'keys2',label:'🎹 B13 Keys 2 IEM'},
-  {id:'test',label:'✅ IEM: Testing + troubleshooting'},
-  {id:'eq_vocals',label:'EQ 🎤 Vocals'},
-  {id:'eq_speech',label:'EQ 🎙️ Speech'},
-  {id:'eq_drums',label:'EQ 🥁 Drums'},
-  {id:'eq_band',label:'EQ 🎹 Band'},
-  {id:'eq_buses',label:'EQ 🔀 Buses'},
-  {id:'eq_room',label:'EQ 🏛️ Room mics'},
-  {id:'limiters',label:'🛡️ Limiters'},
-  {id:'speakers',label:'🔊 RCF Speakers'},
-  {id:'network',label:'🌐 Network'},
-  {id:'scenes',label:'💾 Scenes + Snaps'},
-  {id:'record',label:'🎙️ Multitrack Recording'},
-  {id:'fx',label:'🌀 FX Rack'},
-  {id:'explore',label:'🔭 Features to Explore'},
-  {id:'checklist',label:'✅ Checklist'},
-  {id:'gaps',label:'⚠️ Not considered'},
+  {id:'start',label:'👋 Start here',group:'sound'},
+  {id:'consolemap',label:'🖥️ Console Map',group:'sound'},
+  {id:'overview',label:'🗺️ Overview',group:'sound'},
+  {id:'rack',label:'🏗️ Rack',group:'sound'},
+  {id:'local',label:'🎚️ Inputs IN1–24',group:'sound'},
+  {id:'sd16',label:'📦 SD16 IN25–40',group:'sound'},
+  {id:'outputs',label:'🔊 Outputs',group:'sound'},
+  {id:'buses',label:'🔀 Buses + AUX',group:'sound'},
+  {id:'talkback',label:'🎙️ Talkback',group:'sound'},
+  {id:'gain',label:'📈 Gain staging — do this FIRST',group:'sound'},
+  {id:'sends',label:'📊 Send levels',group:'sound'},
+  {id:'panning',label:'🎯 Panning',group:'sound'},
+  {id:'concept',label:'📖 IEM: The concept',group:'sound'},
+  {id:'wing_setup',label:'⚙️ IEM: WING setup steps',group:'sound'},
+  {id:'drummer',label:'🥁 B9 Drummer IEM',group:'sound'},
+  {id:'bass',label:'🎸 B10 Bass IEM',group:'sound'},
+  {id:'keys1',label:'🎹 B11–12 Keys 1 IEM',group:'sound'},
+  {id:'keys2',label:'🎹 B13 Keys 2 IEM',group:'sound'},
+  {id:'test',label:'✅ IEM: Testing + troubleshooting',group:'sound'},
+  {id:'eq_vocals',label:'EQ 🎤 Vocals',group:'sound'},
+  {id:'eq_speech',label:'EQ 🎙️ Speech',group:'sound'},
+  {id:'eq_drums',label:'EQ 🥁 Drums',group:'sound'},
+  {id:'eq_band',label:'EQ 🎹 Band',group:'sound'},
+  {id:'eq_buses',label:'EQ 🔀 Buses',group:'sound'},
+  {id:'eq_room',label:'EQ 🏛️ Room mics',group:'sound'},
+  {id:'limiters',label:'🛡️ Limiters',group:'sound'},
+  {id:'speakers',label:'🔊 RCF Speakers',group:'sound'},
+  {id:'network',label:'🌐 Network',group:'sound'},
+  {id:'obsintegration',label:'🔗 OBS Integration',group:'integration'},
+  {id:'obsflow',label:'📹 Signal Flow',group:'obs'},
+  {id:'obsscenes',label:'📹 Scenes',group:'obs'},
+  {id:'obsaudio',label:'📹 Audio Config',group:'obs'},
+  {id:'obssettings',label:'📹 Stream Settings',group:'obs'},
+  {id:'obsplugins',label:'📹 Plugins',group:'obs'},
+  {id:'freeshow',label:'📹 FreeShow',group:'freeshow'},
+  {id:'obscomms',label:'📹 Comms & Monitoring',group:'obs'},
+  {id:'obsgear',label:'📹 Gear & Links',group:'obs'},
+  {id:'obschecklist',label:'📹 Setup Checklist',group:'obs'},
+  {id:'scenes',label:'💾 Scenes + Snaps',group:'sound'},
+  {id:'record',label:'🎙️ Multitrack Recording',group:'sound'},
+  {id:'fx',label:'🌀 FX Rack',group:'sound'},
+  {id:'explore',label:'🔭 Features to Explore',group:'sound'},
+  {id:'checklist',label:'✅ Checklist',group:'sound'},
+  {id:'gaps',label:'⚠️ Not considered',group:'sound'},
+];
+const GROUPS=[
+  {id:'sound',label:'🔊 SOUND'},
+  {id:'integration',label:'🔗 INTEGRATION'},
+  {id:'obs',label:'📹 OBS'},
+  {id:'freeshow',label:'📺 FREESHOW'},
 ];
 
 
 const nav=document.getElementById('nav');
+const groupNavEl=document.getElementById('groupNav');
 const views=document.getElementById('views');
+let activeGroup=SECTIONS[0].group;
+let activeId=SECTIONS[0].id;
+
 SECTIONS.forEach((sec,si)=>{
-  const btn=document.createElement('button');
-  btn.className='nb'+(si===0?' active':'');
-  btn.textContent=sec.label;
-  btn.onclick=()=>{
-    document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-    btn.classList.add('active');
-    const v=document.getElementById('v-'+sec.id);
-    v.classList.add('active');
-    const eqMap={eq_vocals:'vocals',eq_speech:'speech',eq_drums:'drums',eq_band:'band',eq_buses:'buses',eq_room:'room'};
-    if(eqMap[sec.id])(CDATA[eqMap[sec.id]]||[]).forEach(ch=>setTimeout(()=>drawEQ('eq-'+ch.id,ch.color,ch.bands),30));
-  };
-  nav.appendChild(btn);
   const div=document.createElement('div');
-  div.className='view'+(si===0?' active':'');
+  div.className='view'+(sec.id===activeId?' active':'');
   div.id='v-'+sec.id;
   div.innerHTML=buildContent(sec.id);
   views.appendChild(div);
 });
+
+function activateTab(sec){
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  const btn=document.querySelector('.nb[data-id="'+sec.id+'"]');
+  if(btn)btn.classList.add('active');
+  const v=document.getElementById('v-'+sec.id);
+  v.classList.add('active');
+  activeId=sec.id;
+  const eqMap={eq_vocals:'vocals',eq_speech:'speech',eq_drums:'drums',eq_band:'band',eq_buses:'buses',eq_room:'room'};
+  if(eqMap[sec.id])(CDATA[eqMap[sec.id]]||[]).forEach(ch=>setTimeout(()=>drawEQ('eq-'+ch.id,ch.color,ch.bands),30));
+}
+
+function renderSubNav(){
+  nav.innerHTML='';
+  const inGroup=SECTIONS.filter(s=>s.group===activeGroup);
+  inGroup.forEach(sec=>{
+    const btn=document.createElement('button');
+    btn.className='nb'+(sec.id===activeId?' active':'');
+    btn.dataset.id=sec.id;
+    btn.textContent=sec.label;
+    btn.onclick=()=>activateTab(sec);
+    nav.appendChild(btn);
+  });
+}
+
+function renderGroupNav(){
+  groupNavEl.innerHTML='';
+  GROUPS.forEach(g=>{
+    const btn=document.createElement('button');
+    btn.className='gnb'+(g.id===activeGroup?' active':'');
+    btn.dataset.g=g.id;
+    btn.textContent=g.label;
+    btn.onclick=()=>{
+      activeGroup=g.id;
+      const firstInGroup=SECTIONS.find(s=>s.group===g.id);
+      renderGroupNav();
+      renderSubNav();
+      activateTab(firstInGroup);
+    };
+    groupNavEl.appendChild(btn);
+  });
+}
+
+renderGroupNav();
+renderSubNav();
+
 
 function startHTML(){return`
 <div class="success"><strong>New to this document, or new to sound entirely?</strong> Start here. This page tells you what to read and skip the jargon-hunting.</div>
@@ -925,7 +1013,7 @@ function buildContent(id){
   if(eqMap[id]){const chs=CDATA[eqMap[id]]||[];return`<div class="ch-grid">${chs.map(ch=>mkCard('eq-'+ch.id,ch.title,ch.sub,ch.ac,ch.color,ch.bands,ch.comp,ch.gate)).join('')}</div>`;}
   const iemSec=IEM_STATIC.find(s=>s.id===id);
   if(iemSec)return iemSec.html;
-  const fn={start:startHTML,consolemap:consoleMapHTML,overview:overviewHTML,rack:rackHTML,local:localHTML,sd16:sd16HTML,outputs:outputsHTML,buses:busesHTML,talkback:talkbackHTML,panning:panningHTML,sends:sendsHTML,gain:gainHTML,network:networkHTML,scenes:scenesHTML,record:recordHTML,fx:fxHTML,limiters:limitersHTML,speakers:speakersHTML,explore:exploreHTML,checklist:checklistHTML,gaps:gapsHTML};
+  const fn={start:startHTML,consolemap:consoleMapHTML,overview:overviewHTML,rack:rackHTML,local:localHTML,sd16:sd16HTML,outputs:outputsHTML,buses:busesHTML,talkback:talkbackHTML,panning:panningHTML,sends:sendsHTML,gain:gainHTML,network:networkHTML,obsintegration:obsIntegrationHTML,obsflow:obsFlowHTML,obsscenes:obsScenesHTML,obsaudio:obsAudioHTML,obssettings:obsSettingsHTML,obsplugins:obsPluginsHTML,freeshow:freeshowHTML,obscomms:obsCommsHTML,obsgear:obsGearHTML,obschecklist:obsChecklistHTML,scenes:scenesHTML,record:recordHTML,fx:fxHTML,limiters:limitersHTML,speakers:speakersHTML,explore:exploreHTML,checklist:checklistHTML,gaps:gapsHTML};
   return fn[id]?fn[id]():'';
 }
 
@@ -1549,6 +1637,7 @@ function networkHTML(){return`
 <div class="ip-card"><div class="ip-dev">Stream Mac</div><div class="ip-addr">192.168.1.11</div><div class="ip-note">OBS + DVS · Wi-Fi OFF</div></div>
 <div class="ip-card"><div class="ip-dev">iPad</div><div class="ip-addr">192.168.1.50+</div><div class="ip-note">WING Copilot</div></div>
 <div class="ip-card"><div class="ip-dev">Guest Wi-Fi</div><div class="ip-addr">192.168.40.x</div><div class="ip-note">Congregation only</div></div>
+<div class="ip-card" style="border-color:#FECACA"><div class="ip-dev">FreeShow PC (DESKTOP-IO3KK2J)</div><div class="ip-addr" style="color:#B91C1C">Not yet assigned</div><div class="ip-note">Runs FreeShow, feeds OBS via NDI — see the FreeShow tab. Worth giving this a fixed IP like everything else here</div></div>
 </div>
 <div class="sl">Stream paths</div>
 <table class="rt"><tr><th>Method</th><th>Path</th><th>Status</th></tr>
@@ -2273,10 +2362,286 @@ function speakersHTML(){return`
 <div class="danger"><strong>Never suspend these by the handles.</strong> RCF is explicit about this — handles are for carrying only. Rigging requires the dedicated M10 threaded inserts (at least 2, on opposite sides) with proper approved hardware, not the handles.</div>
 <div class="tip">35mm pole mount socket on the bottom for stand-mounting — matches standard speaker stands.</div>`;}
 
+function obsIntegrationHTML(){return`
+<div class="success"><strong>This is the bridge between the two halves of this document — the sound system (everything before this tab) and OBS/streaming (the teal-accented tabs after this one).</strong> Kept as a clearly distinct section rather than blended in, since they're genuinely different domains — this tab is specifically the handoff point where the two actually connect.</div>
+
+<div class="sl">Current state — USB audio</div>
+<div class="tip">This is the same "USB (current)" path already documented in the Network tab: <strong>Matrix → WING routing → USB L/R out → PC → OBS</strong>. Here's what that looks like from OBS's side specifically.</div>
+<ul class="step-list">
+<li><div class="sn">1</div><div class="at">WING's Matrix output reaches the Stream Mac via <strong>UGREEN USB-B → USB-C</strong>, appearing as a standard USB audio interface to the Mac</div></li>
+<li><div class="sn">2</div><div class="at">In OBS, this is added as its own <strong>Audio Input Capture</strong> source — separate from anything video-related, and separate from the ATEM's own embedded audio</div></li>
+<li><div class="sn">3</div><div class="at">This source lives on OBS's <strong>"Mic/Aux" track</strong> — the primary program audio, with Noise Suppression and a light Compressor filter applied</div></li>
+</ul>
+
+<div class="danger"><strong>The ATEM's own embedded HDMI audio must stay muted in OBS, always.</strong> The ATEM carries its own audio track (from camera mics) alongside the video feed — if that's ever unmuted alongside the WING/Matrix audio already coming in via USB, the stream gets doubled or echoed audio. This has nothing to do with Dante — true whether you're on USB or Dante, and worth checking any time OBS scenes get rebuilt.</div>
+
+<div class="sl">OBS's audio mixer — what each track actually is</div>
+<table class="rt"><tr><th>OBS Track</th><th>Actual source</th><th>Role</th></tr>
+<tr><td>Desktop Audio</td><td>Mac system sound</td><td>Hold music / pre-service graphics only — muted during the live program</td></tr>
+<tr style="background:rgba(37,99,235,0.05)"><td><strong>Mic/Aux</strong></td><td><strong>WING Matrix, via USB (or Dante once implemented)</strong></td><td>This is the one that matters — the actual live mix reaching the stream</td></tr>
+<tr><td>ATEM embedded audio</td><td>ATEM's own HDMI/USB feed</td><td>Always muted — see warning above</td></tr>
+</table>
+
+<div class="sl">Future state — when Dante is implemented</div>
+<div class="danger"><strong>The only thing that actually changes: what device OBS's Mic/Aux source points to.</strong> Everything else — the track structure, the mute-ATEM rule, the Noise Suppression/Compressor filters — stays exactly the same. This is a small, contained change, not a rebuild.</div>
+<table class="rt"><tr><th></th><th>Current (USB)</th><th>Future (Dante)</th></tr>
+<tr><td>OBS source device</td><td>UGREEN USB audio interface</td><td>Dante Virtual Soundcard</td></tr>
+<tr><td>Physical path</td><td>WING → USB cable → Mac</td><td>WING Dante card → network switch → Mac (no USB cable)</td></tr>
+<tr><td>OBS track it feeds</td><td>Mic/Aux</td><td>Mic/Aux — same track, same filters</td></tr>
+<tr><td>Sample rate</td><td>Whatever the USB interface reports</td><td>48kHz, confirmed to match WING's clock</td></tr>
+</table>
+
+<div class="sl">The actual switch-over steps</div>
+<div class="tip">Steps 1–5 (WING Dante setup, Stream Mac config, Dante Controller routing) are already documented in full in the <strong>Network tab</strong> — this is specifically step 6 from that sequence, expanded with the OBS-side detail.</div>
+<ul class="step-list">
+<li><div class="sn">1</div><div class="at">Complete Dante setup steps 1–5 in the Network tab first — WING detected, Stream Mac routed, Dante Controller showing a green confirmed connection</div></li>
+<li><div class="sn">2</div><div class="at">In OBS, select the existing <strong>Mic/Aux Audio Input Capture</strong> source (don't create a new one — same source, new device)</div></li>
+<li><div class="sn">3</div><div class="at">Change its device dropdown from the UGREEN USB interface to <strong>Dante Virtual Soundcard</strong></li>
+<li><div class="sn">4</div><div class="at">Confirm levels are moving in OBS's audio mixer on the Mic/Aux track — same test as the original USB setup</div></li>
+<li><div class="sn">5</div><div class="at">Leave the UGREEN USB cable physically connected as a fallback until Dante's been proven reliable over a few real services — don't remove the safety net on day one</div></li>
+<li><div class="sn">6</div><div class="at">Once confident: this becomes the new default, and the USB path becomes the documented fallback instead of the primary — update the Network tab's status column when that happens</div></li>
+</ul>`;}
+
+function obsFlowHTML(){return`<div class="obs-tab">
+<div class="obs-banner">📹 STREAMING &amp; OBS — separate domain from the sound system, connected via the Integration tab</div>
+
+<div class="sl">Video path — ×3 cameras</div>
+<div class="card"><div class="card-body">
+<div class="obs-flow">
+<div class="obs-node">iPhone 15 Pro Max<br><small>Blackmagic Camera App</small></div><span class="obs-arrow">→</span>
+<div class="obs-node">Hollyland Cosmo C2 TX<br><small>cold-shoe mount</small></div><span class="obs-arrow">⟿</span>
+<div class="obs-node">Cosmo C2 RX</div><span class="obs-arrow">→</span>
+<div class="obs-node">HDMI (2m)</div><span class="obs-arrow">→</span>
+<div class="obs-node">ATEM Mini Pro ISO</div>
+</div>
+</div></div>
+<div class="tip">The Cosmo C2 kit is sold as <strong>2TX + 1RX</strong>. With 3 iPhones, either add a <strong>second RX</strong> (or a second kit) so all 3 cameras arrive wirelessly, or run <strong>Camera 3 wired</strong> via direct HDMI to the ATEM as a fallback/cheaper option. Worth confirming which of the 3 inputs is the "wired" one before the shoot day.</div>
+
+<div class="sl">Program / capture path</div>
+<div class="card"><div class="card-body">
+<div class="obs-flow">
+<div class="obs-node">ATEM Mini Pro ISO<br><small>hardware switcher</small></div><span class="obs-arrow">→</span>
+<div class="obs-node">USB-C</div><span class="obs-arrow">→</span>
+<div class="obs-node">MacBook Pro (M3 Pro)</div><span class="obs-arrow">→</span>
+<div class="obs-node sw">OBS Studio</div><span class="obs-arrow">→</span>
+<div class="obs-node sw">YouTube / Facebook</div>
+</div>
+</div></div>
+<ul class="step-list">
+<li><div class="sn">•</div><div class="at">The ATEM appears in OBS as a <strong>USB Video/Audio Capture Device</strong> — one clean "Program" feed already switched between all 3 cameras, rather than OBS doing the switching itself</div></li>
+<li><div class="sn">•</div><div class="at">The ATEM's own multiview HDMI output feeds <strong>Monitor 1</strong> directly (camera preview/program thumbnails) — a hardware connection, separate from OBS</div></li>
+<li><div class="sn">•</div><div class="at">The ATEM records isolated (ISO) tracks of each camera to its own SD card as a backup/multicam edit source — independent of the live stream</div></li>
+</ul>
+
+<div class="sl">Audio path</div>
+<div class="card"><div class="card-body">
+<div class="obs-flow">
+<div class="obs-node">Mixer</div><span class="obs-arrow">→</span>
+<div class="obs-node">UGREEN USB-B → USB-C</div><span class="obs-arrow">→</span>
+<div class="obs-node">MacBook Pro</div><span class="obs-arrow">→</span>
+<div class="obs-node sw">OBS Audio Input</div>
+</div>
+<div style="margin-top:10px">Audio comes into the Mac as a separate USB audio interface from the mixer — <strong>not</strong> through the ATEM. In OBS this is its own <em>Audio Input Capture</em> source, kept independent of the ATEM's embedded HDMI audio (mute the ATEM's audio channel in OBS to avoid double audio/echo — see the Integration tab).</div>
+</div></div>
+
+<div class="sl">Monitor 2 — stream output</div>
+<div class="card"><div class="card-body">Use OBS's <strong>Fullscreen Projector (Program)</strong> sent to the ARZOPA portable monitor (via a Belkin HDMI adapter from the MacBook) so you can watch exactly what's going out live, separate from Monitor 1's camera preview.</div></div>
+</div>`;}
+
+function obsScenesHTML(){return`<div class="obs-tab">
+<div class="obs-banner">📹 STREAMING &amp; OBS — separate domain from the sound system, connected via the Integration tab</div>
+<div class="success"><strong>Replaced with the real scene collection — confirmed directly from an actual exported OBS profile (Salem_Scenes.json), not a plan.</strong> This is what's genuinely built, 13 scenes, considerably more developed than a simple 5-scene structure.</div>
+
+<div class="success"><strong>Confirmed: "Video Capture Device" is normally the ATEM Mini Pro ISO.</strong> This export happened to be captured while it was temporarily switched to the Mac's built-in FaceTime HD Camera for a specific test — not the standard config. Every scene below that references a camera feed should be read as "the ATEM" in normal operation.</div>
+
+<div class="sl">A new piece of infrastructure, not documented anywhere until now</div>
+<div class="danger"><strong>A separate Windows PC ("DESKTOP-IO3KK2J") running FreeShow — church presentation software — feeds OBS multiple NDI streams.</strong> This machine isn't mentioned in the original planning guide at all. Confirmed NDI feeds coming from it: "FreeShow NDI - Primary" (main graphics), "FreeShow NDI - Mini Bible Slide", "FreeShow NDI - Lower Third SS + LYRICS", and "Loghema Alternate". This is a real, separate system worth documenting properly — see the Plugins tab for how DistroAV/NDI receives it.</div>
+
+<div class="sl">The 13 real scenes, in order</div>
+<table class="rt"><tr><th>Scene</th><th>What it's actually built from</th></tr>
+<tr><td><strong>Live</strong></td><td>A single "We Are Live" graphic — likely the pre-service holding scene</td></tr>
+<tr><td><strong>Welcome</strong></td><td>"Welocome Video" — a video file source (welcome/intro video)</td></tr>
+<tr><td><strong>Main + NDI Primary Changes</strong></td><td>NDI background + camera + BIBLE AI overlay, grouped</td></tr>
+<tr><td><strong>Main</strong></td><td>The full-service scene — camera plus a stack of toggleable graphics: Salem Logo, Liturgist, Church Choir Intriot, Salem Praise, Liturgical Prayer, Church Choir Anthem, Preacher, Announcement, Offertory Prayer, Closing Prayer and Benediction</td></tr>
+<tr><td><strong>Preacher + NDI Half Primary</strong></td><td>Camera + a half-screen NDI feed from FreeShow</td></tr>
+<tr><td><strong>NDI Primary</strong></td><td>Full-screen FreeShow NDI feed alone, no camera</td></tr>
+<tr><td><strong>NDI SS + LYRICS</strong></td><td>Camera + Salem Logo + FreeShow's lower-third lyrics feed</td></tr>
+<tr><td><strong>L Banner + Main</strong></td><td>Camera + a lower banner graphic (BTL L Banner)</td></tr>
+<tr><td><strong>REMOTE CAMERA</strong></td><td><strong>VDO.Ninja</strong> browser source — a genuine remote camera/guest contribution, not a local feed</td></tr>
+<tr><td><strong>RE BROADCAST</strong></td><td>A Facebook browser source — likely re-embedding or simulcasting Facebook Live content</td></tr>
+<tr><td><strong>BIBLE AI</strong></td><td>Full-screen "BIBLE AI MAIN" — FreeShow's Primary NDI feed, likely its auto-detected Bible verse display feature</td></tr>
+<tr><td><strong>BIBLE AI LOWER THIRD</strong></td><td>Camera + a second NDI feed ("Loghema Alternate") as a lower third</td></tr>
+<tr><td><strong>MAIN + BIBLE AI</strong></td><td>Same grouped composition as "Main + NDI Primary Changes"</td></tr>
+</table>
+
+<div class="sl">Source setup notes</div>
+<ul class="step-list">
+<li><div class="sn">•</div><div class="at"><strong>Camera feed:</strong> ATEM Mini Pro ISO, in normal operation — confirmed the FaceTime camera seen in this specific export was a temporary test swap, not the standard config</div></li>
+<li><div class="sn">•</div><div class="at"><strong>FreeShow graphics/lyrics:</strong> received over the network as NDI sources, not a local capture — requires DistroAV installed and FreeShow's NDI output enabled on the Windows PC (see Plugins tab)</div></li>
+<li><div class="sn">•</div><div class="at"><strong>Mixer audio:</strong> a single "Mic/Aux" source, confirmed set to the WING's own USB audio interface directly — see the Audio Config tab for the exact device ID</div></li>
+<li><div class="sn">•</div><div class="at"><strong>Remote camera:</strong> VDO.Ninja browser source, its own scene — a genuinely separate contribution path from everything else here</div></li>
+</ul>
+</div>`;}
+
+function obsAudioHTML(){return`<div class="obs-tab">
+<div class="obs-banner">📹 STREAMING &amp; OBS — separate domain from the sound system, connected via the Integration tab</div>
+<div class="success"><strong>Confirmed directly from the real OBS profile, not assumed.</strong> The "Mic/Aux" source's actual device ID: <code>AppleUSBAudioEngine:BEHRINGER:WING:...:1,2</code> — this is macOS talking to the WING itself as a USB audio class device, confirming the source really is a direct USB connection to WING, not routed through anything else. Configured level: roughly –2dB, monitoring set to Monitor + Output.</div>
+<div class="sl">OBS audio mixer panel — full detail</div>
+<div class="tip">Quick-reference version of this table lives on the Integration tab; this is the fuller picture including filters.</div>
+<table class="rt"><tr><th>Track</th><th>Source</th><th>Notes</th></tr>
+<tr><td>Desktop Audio</td><td>Mac system sound</td><td>Only for hold music/graphics — keep muted during live program to avoid feedback</td></tr>
+<tr style="background:rgba(37,99,235,0.05)"><td>Mic/Aux</td><td>WING, direct via USB (confirmed device ID above)</td><td>Primary program audio — apply Noise Suppression + a light Compressor filter</td></tr>
+<tr><td>ATEM embedded audio</td><td>ATEM HDMI/USB feed, if the ATEM is in use</td><td><strong>Mute this</strong> if audio is already coming in cleanly from the mixer — prevents doubled/echoed audio</td></tr>
+</table>
+<div class="danger"><strong>Genuinely interesting confirmed detail: OBS's separate global monitoring device is already set to "Dante Virtual Soundcard,"</strong> even though the actual stream source (Mic/Aux above) is still the direct USB connection. This matches exactly what the Network tab already describes as the current Dante status — "testing," not yet the primary source. It looks like Dante's been set up enough to monitor through, but the live Mic/Aux source hasn't been switched over to it yet. That switch-over is exactly what the Integration tab's step-by-step covers.</div>
+<div class="danger">Use wired headphones or studio monitors for monitoring — never Bluetooth, since it adds latency that will throw off your live mix relative to picture.</div>
+</div>`;}
+
+function obsSettingsHTML(){return`<div class="obs-tab">
+<div class="obs-banner">📹 STREAMING &amp; OBS — separate domain from the sound system, connected via the Integration tab</div>
+<div class="success"><strong>Replaced with real, exported settings — confirmed from the actual profile files, not estimated.</strong> One genuinely important correction: actual stream bitrate is <strong>8,000 Kbps</strong>, roughly double what was originally estimated here.</div>
+
+<div class="sl">Stream output — confirmed live settings</div>
+<table class="rt"><tr><th>Setting</th><th>Confirmed value</th></tr>
+<tr><td>Encoder</td><td>Apple VideoToolbox H264 (hardware) — confirms the original recommendation was right</td></tr>
+<tr><td>Bitrate</td><td><strong>8,000 Kbps</strong> — higher than the ~4,000–4,500 originally estimated here</td></tr>
+<tr><td>Keyframe Interval</td><td>2s — matches the original recommendation exactly</td></tr>
+<tr><td>Output resolution</td><td>1920×1080 @ 30fps, confirmed</td></tr>
+<tr><td>Color</td><td>NV12 / BT.709 / Partial range, bicubic scaling</td></tr>
+<tr><td>Reconnect behavior</td><td>Enabled — 12s retry delay, up to 100 retries</td></tr>
+</table>
+<div class="danger"><strong>Worth double-checking on-site given the real bitrate is higher than originally planned:</strong> 8,000 Kbps needs roughly 13–16 Mbps of real upload headroom (at the ~50–60% rule) to run safely. If the EE SIM connection can't consistently deliver that, this is the number to actually reduce on a bad day — not something to leave on 8,000 by default regardless of connection quality.</div>
+
+<div class="sl">Recording — confirmed live settings</div>
+<table class="rt"><tr><th>Setting</th><th>Confirmed value</th></tr>
+<tr><td>Encoder</td><td>Apple VideoToolbox HEVC — different from the stream's H264, higher efficiency for local storage</td></tr>
+<tr><td>Rate control</td><td>CRF (quality-based), quality setting 86</td></tr>
+<tr><td>Format</td><td>MKV</td></tr>
+<tr><td>Save location</td><td>~/Movies on the Stream Mac</td></tr>
+<tr><td>File splitting</td><td>Every 15 minutes, or 2048MB — whichever comes first</td></tr>
+<tr><td>Audio</td><td>CoreAudio AAC</td></tr>
+</table>
+<div class="tip">This recording is genuinely separate from the stream — its own encoder, its own quality target, not bandwidth-constrained the way the live stream is. Confirmed as intended: a real local backup, not a duplicate of what's going out live.</div>
+
+<div class="sl">Streaming destination</div>
+<div class="card"><div class="card-body">Confirmed: <strong>YouTube, via RTMPS</strong> (the encrypted variant of RTMP). <strong>Stream key intentionally not reproduced here</strong> — that's a live credential, and this document may end up more widely shared than the OBS profile itself. If it's ever needed, it's in OBS's own Stream settings, not something to copy into a reference doc.</div></div>
+</div>`;}
+
+function obsPluginsHTML(){return`<div class="obs-tab">
+<div class="obs-banner">📹 STREAMING &amp; OBS — separate domain from the sound system, connected via the Integration tab</div>
+<div class="sl">NDI &amp; Move plugins</div>
+<div class="success"><strong>DistroAV isn't a future option here — it's already actively in use.</strong> Confirmed from the real scene export: 4 separate NDI feeds are already coming in from a Windows PC ("DESKTOP-IO3KK2J") running <strong>FreeShow</strong>, church presentation software, for graphics, lower thirds, and lyrics. This is real, working infrastructure, not a "worth exploring" item.</div>
+<div class="card"><div class="card-title">DistroAV (OBS NDI)</div><div class="card-body">Lets OBS send/receive video over your local network via NDI instead of HDMI/USB. Confirmed actively receiving 4 feeds from the FreeShow PC: Primary, Mini Bible Slide, Lower Third SS + LYRICS, and an alternate feed. Also useful for sending OBS's <strong>Program output</strong> to Monitor 2 wirelessly instead of a wired HDMI run.<br><br><code>github.com/DistroAV/DistroAV</code></div></div>
+<div class="card"><div class="card-title">Source Dock / Move</div><div class="card-body">Lets you animate a source's position, size, or crop between scenes (smooth pan/zoom on a camera feed) and pop sources out into floating docks for easier control during a live service — handy for quickly repositioning the lower-third or a graphic without re-keying it each scene.<br><br><code>obsproject.com/forum/resources/source-dock.1317</code></div></div>
+</div>`;}
+
+function freeshowHTML(){return`<div class="freeshow-tab">
+<div class="freeshow-banner">📺 FREESHOW — its own domain, separate from Sound and OBS, connected via NDI</div>
+<div class="success"><strong>Confirmed real infrastructure, not previously documented anywhere.</strong> A dedicated Windows PC, <strong>DESKTOP-IO3KK2J</strong>, runs <strong>FreeShow</strong> — open-source church presentation software — and feeds OBS 4 separate NDI streams for graphics, lyrics, and lower thirds.</div>
+
+<div class="sl">The 4 confirmed NDI feeds</div>
+<table class="rt"><tr><th>NDI feed name</th><th>Used in OBS scene(s)</th><th>Purpose</th></tr>
+<tr><td><strong>FreeShow NDI - Primary</strong></td><td>Main + NDI Primary Changes, NDI Primary, MAIN + BIBLE AI, BIBLE AI</td><td>Main graphics feed — the one used most</td></tr>
+<tr><td><strong>FreeShow NDI - Mini Bible Slide</strong></td><td>Preacher + NDI Half Primary</td><td>Half-screen Bible verse display, alongside the camera</td></tr>
+<tr><td><strong>FreeShow NDI - Lower Third SS + LYRICS</strong></td><td>NDI SS + LYRICS</td><td>Lower-third lyrics/text overlay</td></tr>
+<tr><td><strong>Loghema Alternate</strong></td><td>BIBLE AI LOWER THIRD (as "NDI® Source 2")</td><td>A second lower-third feed — exact purpose of this one not yet confirmed</td></tr>
+</table>
+
+<div class="sl">How it connects</div>
+<div class="card"><div class="card-body">FreeShow → NDI output (built into FreeShow itself) → local network → DistroAV plugin in OBS on the Stream Mac. No capture card, no HDMI cable — purely a network connection between two computers. See the Plugins tab for the DistroAV/NDI side of this.</div></div>
+
+<div class="danger"><strong>Real gap: this machine isn't in the Network tab's IP plan at all.</strong> Every other device on this network — the switch, WING, both Macs, the iPad — has a documented IP. DESKTOP-IO3KK2J doesn't yet. Given OBS depends on reliably finding this machine's NDI streams live, during a service, it's worth giving it a fixed/reserved IP like everything else here, rather than leaving it on DHCP where its address could change.</div>
+
+<div class="sl">What's confirmed vs. what isn't</div>
+<table class="rt"><tr><th>Confirmed</th><th>Not yet documented</th></tr>
+<tr><td>Machine name (DESKTOP-IO3KK2J)</td><td>IP address</td></tr>
+<tr><td>Software (FreeShow)</td><td>FreeShow version</td></tr>
+<tr><td>4 NDI feed names, and which scene uses each</td><td>Who operates it during a service, and from where</td></tr>
+<tr><td>NDI as the connection method (confirmed via DistroAV)</td><td>Wired or Wi-Fi connection to the network</td></tr>
+</table>
+<div class="tip">"BIBLE AI" as a name suggests FreeShow's automatic Bible-reference detection feature (displaying a verse automatically when it's spoken) — plausible given the scene names, but not independently confirmed here.</div>
+</div>`;}
+
+function obsCommsHTML(){return`<div class="obs-tab">
+<div class="obs-banner">📹 STREAMING &amp; OBS — separate domain from the sound system, connected via the Integration tab</div>
+<div class="sl">SYNCO XTALK X5 Wireless Intercom</div>
+<ul class="step-list">
+<li><div class="sn">•</div><div class="at">Full-duplex 2.4GHz headsets — good for director-to-camera-operator communication without needing line of sight, especially useful with 3 roaming iPhone camera operators</div></li>
+<li><div class="sn">•</div><div class="at">350m/1148ft range and 24h battery — plenty for a single-building service, but charge headsets the night before, not same-day</div></li>
+</ul>
+<div class="sl">Monitors</div>
+<table class="rt"><tr><th>Monitor</th><th>Feeds</th><th>Connection</th></tr>
+<tr><td>Monitor 1</td><td>Camera preview/multiview from ATEM</td><td>ATEM multiview HDMI out (direct)</td></tr>
+<tr><td>Monitor 2 (ARZOPA)</td><td>OBS Program output</td><td>MacBook HDMI out (via Belkin adapter) or NDI</td></tr>
+</table>
+</div>`;}
+
+function obsGearHTML(){return`<div class="obs-tab">
+<div class="obs-banner">📹 STREAMING &amp; OBS — separate domain from the sound system, connected via the Integration tab</div>
+<div class="tip">Amazon links are affiliate-style product links copied from the original planning doc — prices/stock may have changed, worth a quick re-check before ordering.</div>
+<div class="sl">Cameras &amp; mounting</div>
+<table class="rt"><tr><th>Item</th><th>Where to get it</th></tr>
+<tr><td>iPhone 15 Pro Max (×3)</td><td>Apple Store (UK) — any HD/4K iPhone works</td></tr>
+<tr><td>SMALLRIG Mobile Video Rig Kit</td><td>Amazon UK</td></tr>
+<tr><td>SMALLRIG Cold Shoe Mount Adapter</td><td>Amazon UK</td></tr>
+<tr><td>K&F Concept 77" Tripod (×3)</td><td>Amazon UK</td></tr>
+</table>
+<div class="sl">Transmission &amp; capture</div>
+<table class="rt"><tr><th>Item</th><th>Where to get it</th></tr>
+<tr><td>Hollyland Cosmo C2 (2TX+1RX)</td><td>Amazon UK</td></tr>
+<tr><td>Blackmagic ATEM Mini Pro ISO</td><td>CVP — best price guaranteed, per the original notes</td></tr>
+<tr><td>Silkland 4K HDMI Cable 2m (×6)</td><td>Amazon UK</td></tr>
+<tr><td>Belkin HDMI Adapter (×3)</td><td>Amazon UK</td></tr>
+<tr><td>UGREEN HDMI-path cable (ATEM ↔ Monitor 1)</td><td>Amazon UK</td></tr>
+</table>
+<div class="sl">Computer &amp; connectivity</div>
+<table class="rt"><tr><th>Item</th><th>Where to get it</th></tr>
+<tr><td>MacBook Pro (M3 Pro, 18GB)</td><td>Apple Store (UK)</td></tr>
+<tr><td>UGREEN USB-B to USB-C (mixer → Mac)</td><td>Amazon UK</td></tr>
+<tr><td>UGREEN USB-C to USB-C 60W (ATEM → Mac)</td><td>Amazon UK</td></tr>
+<tr><td>TP-Link Archer MR600 (4G/EE SIM router)</td><td>Amazon UK</td></tr>
+</table>
+<div class="sl">Monitoring</div>
+<table class="rt"><tr><th>Item</th><th>Where to get it</th></tr>
+<tr><td>ARZOPA 16.1" 144Hz Portable Monitor (Monitor 2)</td><td>Amazon UK</td></tr>
+<tr><td>Monitor 1 (camera preview)</td><td>Not specified in the source doc — any HDMI monitor accepting the ATEM's multiview output works</td></tr>
+<tr><td>Wired headphones/studio monitors</td><td>Not specified — any wired (non-Bluetooth) option</td></tr>
+</table>
+<div class="sl">Communication</div>
+<table class="rt"><tr><th>Item</th><th>Where to get it</th></tr>
+<tr><td>SYNCO XTALK X5 Wireless Intercom</td><td>Amazon UK</td></tr>
+</table>
+<div class="sl">Software</div>
+<table class="rt"><tr><th>Item</th><th>Where to get it</th></tr>
+<tr><td>Blackmagic Camera App (iPhone)</td><td>App Store</td></tr>
+<tr><td>OBS Studio</td><td>obsproject.com</td></tr>
+<tr><td>NDI Tools</td><td>ndi.video/tools</td></tr>
+<tr><td>DistroAV (OBS-NDI plugin)</td><td>GitHub – DistroAV v6.0.0</td></tr>
+<tr><td>OBS Move / Source Dock plugin</td><td>obsproject.com forum</td></tr>
+</table>
+</div>`;}
+
+function obsChecklistHTML(){return`<div class="obs-tab">
+<div class="obs-banner">📹 STREAMING &amp; OBS — separate domain from the sound system, connected via the Integration tab</div>
+<div class="sl">Pre-service setup checklist</div>
+<table class="rt"><tr><th>Check</th><th>✓</th></tr>
+<tr><td>Charge all 3 iPhones, Cosmo TX/RX units, and SYNCO headsets overnight</td><td>☐</td></tr>
+<tr><td>Mount iPhones on SMALLRIG rigs + tripods, attach Cosmo TX via cold-shoe mount</td><td>☐</td></tr>
+<tr><td>Run HDMI from each Cosmo RX (or wired Camera 3) into ATEM Mini Pro ISO inputs</td><td>☐</td></tr>
+<tr><td>Confirm ATEM multiview HDMI → Monitor 1</td><td>☐</td></tr>
+<tr><td>Confirm ATEM USB-C → MacBook, appears as capture device in OBS</td><td>☐</td></tr>
+<tr><td>Connect mixer → UGREEN USB-B/C → MacBook, confirm level in OBS audio mixer</td><td>☐</td></tr>
+<tr><td>Mute ATEM's embedded audio track in OBS (avoid double audio)</td><td>☐</td></tr>
+<tr><td>Set Monitor 2 to OBS Program output (fullscreen projector or NDI)</td><td>☐</td></tr>
+<tr><td>Run a speed test on the EE SIM router — set OBS bitrate accordingly</td><td>☐</td></tr>
+<tr><td>Test stream key / go live to an unlisted YouTube/Facebook test event</td><td>☐</td></tr>
+<tr><td>Confirm wired headphones/monitors working for audio monitoring (not Bluetooth)</td><td>☐</td></tr>
+<tr><td>Pair and test SYNCO intercom with all camera operators</td><td>☐</td></tr>
+<tr><td>Insert/format SD cards for ATEM ISO recording, confirm free space</td><td>☐</td></tr>
+</table>
+</div>`;}
+
 function checklistHTML(){return`
-
-
-
 
 <div class="sl">Pre-service checklist</div>
 <table class="rt"><tr><th>Check</th><th>✓</th></tr>
