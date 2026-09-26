@@ -604,6 +604,20 @@ const IEM_STATIC=[
 </table>`
 },
 {id:'wing_setup',label:'⚙️ WING setup steps',html:`
+<div class="sl">How AES50 routing actually works — for anyone new to this</div>
+<div class="card"><div class="card-title">The ROUTING page, in plain terms</div>
+<div class="card-body">This is the one console screen that decides "which digital output slot does this bus's signal come out on." It's genuinely worth understanding on its own, since it's used constantly — not just for IEM.
+<ol style="margin:10px 0 0 20px;line-height:1.9">
+<li>Press <strong>ROUTING</strong> on the console</li>
+<li>Select the <strong>OUTPUT</strong> tab (this page has both an Input and an Output tab — Output is what you want)</li>
+<li>On the <strong>right</strong> side of the screen, set the source-select to <strong>Bus</strong> — this tells the page "I want to route a bus," not a channel or a Main</li>
+<li>On the <strong>left</strong> side, use the dropdown to select <strong>AES50</strong> — this is the destination format, the digital pipe to SD16</li>
+<li>The page is normally locked to prevent accidental changes — <strong>unlock it</strong> first</li>
+<li>Now you're looking at a grid: buses down one side, AES50 Out slots across the other. Tap the cell where the bus you want meets the Out number you want, and that mapping is made</li>
+</ol>
+</div></div>
+<div class="tip">Same screen, same steps, for every single bus→AES50 assignment in this whole system — Main LR to Out 1, B9 to Out 2, all the way through. Once this page makes sense once, it makes sense everywhere.</div>
+
 <div class="sl">Step-by-step: setting up one IEM mix bus correctly</div>
 <ul class="step-list">
 <li><div class="sn">1</div><div class="at">CONFIG → BUS/MAIN → select <strong>B9</strong> → <strong>RENAME</strong> to "IEM Drummer" (repeat later for B10/B11/B13)</div></li>
@@ -615,7 +629,7 @@ const IEM_STATIC=[
 <li><div class="sn">5c</div><div class="at">On that same Lead vocal channel screen, check the <strong>TAP POINT</strong> field at the top — it should read <strong>COMP</strong> (i.e. after the compressor, before the fader). If it's set to anything after the fader, move it back — this is what actually makes TAP behave as pre-fader</div></li>
 <li><div class="sn">6</div><div class="at">Select the <strong>Click channel</strong> → same pattern: <strong>TAP</strong> mode (not POST) on B9's send, TAP POINT confirmed at <strong>COMP</strong></div></li>
 <li><div class="sn">7</div><div class="at">Select bus B9 → CONFIG → <strong>DYNAMICS → Limiter</strong> → ON → ceiling –6 dBFS</div></li>
-<li><div class="sn">8</div><div class="at">Select bus B9 → CONFIG → <strong>ROUTING</strong> → assign AES50 Out 2 → carries to SD16 Out 2 → P2 #1</div></li>
+<li><div class="sn">8</div><div class="at">Select bus B9 → <strong>ROUTING</strong> page → <strong>OUTPUT</strong> tab → on the right, set the source-select to <strong>Bus</strong> → on the left, in the dropdown, select <strong>AES50</strong> → unlock the page → map B9 to AES50 Out 2 → carries to SD16 Out 2 → P2 #1</div></li>
 <li><div class="sn">9</div><div class="at">Repeat steps 1–8 for B10 (Bass · AES50 Out 3), B11 (Keys 1 · AES50 Out 4), B13 (Keys 2 · AES50 Out 6)</div></li>
 <li><div class="sn">9b</div><div class="at">Stereo-link B11 and B12 on WING (CONFIG → BUS/MAIN → select both → link as stereo pair) — Keys 1's monitor mix is active in stereo now, mirror every send from B11 onto B12 automatically once linked</div></li>
 <li><div class="sn">9c</div><div class="at">Select the <strong>TALK A / engineer channel (IN13)</strong> → set <strong>TAP</strong> mode (not POST) on all 4 IEM bus sends (B9, B10, B11, B13) at a cue level, and confirm IN13's TAP POINT is after Comp — this is separate from TALK A's existing stage-speaker output, so musicians on P2 hear it even though they're acoustically sealed off from the room</div></li>
@@ -634,13 +648,14 @@ const IEM_STATIC=[
 <tr><td>Rename a spare bus for IEM use</td><td>CONFIG → BUS/MAIN → select bus → RENAME</td></tr>
 <tr><td>Route one bus's send into another bus</td><td>CONFIG → <span class="wp">BUS → BUS</span> → set destination bus → adjust the source bus's row</td></tr>
 <tr><td>Send the click track into an IEM bus</td><td>Select Click's channel → channel SENDS/assign → target bus → set level</td></tr>
-<tr><td>Route an IEM bus's output</td><td>CONFIG → select the IEM bus → <span class="wp">ROUTING</span> → AES50 Out 2–6</td></tr>
+<tr><td>Route an IEM bus's output</td><td>ROUTING → OUTPUT tab → source-select <span class="wp">Bus</span> → dropdown <span class="wp">AES50</span> → unlock → map to Out 2–6</td></tr>
 <tr><td>Set an IEM bus's limiter</td><td>CONFIG → select the IEM bus → <span class="wp">DYNAMICS</span> → Limiter → ON → –6dBFS</td></tr>
 <tr><td>See every send into one IEM bus at once</td><td>CONFIG → BUS → BUS → select that bus as destination → shows every source bus in one screen</td></tr>
 </table>`
 },
 {id:'drummer',label:'🥁 B9 Drummer IEM',html:`
 <div class="sl">B9 — Drummer's IEM mix</div>
+<div class="success"><strong>Live-tested — went well.</strong> First real test with the drummer confirmed the balance below works as documented. One change since: the drummer asked to hear backing vocals too, added below.</div>
 <div class="iem-mix">
 <div class="iem-title">Each row below = a source bus's own send into B9 · all PRE-fader · Limiter –6dB on B9 · → AES50 Out 2 → SD16 Out 2 → P2 #1</div>
 <div class="iem-row"><span class="iem-src">Click track (IN37) → normal channel send direct to B9</span><span class="iem-lvl" style="color:#1D9E75">0 dB — primary</span></div>
@@ -649,15 +664,17 @@ const IEM_STATIC=[
 <div class="iem-row"><span class="iem-src">Drums bus (B5–6) → send into B9</span><span class="iem-lvl" style="color:#1D9E75">–3 dB — high</span></div>
 <div class="iem-row"><span class="iem-src">Bass bus → send into B9</span><span class="iem-lvl" style="color:#BA7517">–6 dB — medium</span></div>
 <div class="iem-row"><span class="iem-src">Lead vocal (IN1, –6dBFS limiter) → direct channel send into B9</span><span class="iem-lvl" style="color:#BA7517">–9 dB — cues only</span></div>
+<div class="iem-row"><span class="iem-src">Backing vocals bus (B1–2) → send into B9</span><span class="iem-lvl">–8 dB — new, added by request · starting point, not yet live-tested</span></div>
 <div class="iem-row"><span class="iem-src">Keys 1 bus + Keys 2 bus → send into B9</span><span class="iem-lvl">–12 dB — low</span></div>
 <div class="iem-row"><span class="iem-src">Room music / stems</span><span class="iem-lvl" style="color:#A32D2D">No send into B9 at all</span></div>
 </div>
 <div class="tip">Kick and snare still arrive together as one Drums bus send — they're not separately adjustable in the drummer's ears. If the drummer needs kick louder than snare just for themselves, that one channel would need its own direct channel→B9 send, same as click.</div>
 <div class="card"><div class="card-title">Why this balance</div>
-<div class="card-body">The drummer sets tempo for everyone — click dominates. The drums bus is present for self-monitoring. Bass is medium so the rhythm section locks together. Lead vocal is quiet — just enough for section cues. Keys is barely there for harmonic context only.</div></div>`
+<div class="card-body">The drummer sets tempo for everyone — click dominates. The drums bus is present for self-monitoring. Bass is medium so the rhythm section locks together. Lead vocal is quiet — just enough for section cues. Backing vocals added at the same low level as Keys 1/2 already use, matching established convention. Keys is barely there for harmonic context only.</div></div>`
 },
 {id:'bass',label:'🎸 B10 Bass IEM',html:`
 <div class="sl">B10 — Bass player's IEM mix</div>
+<div class="success"><strong>Live-tested.</strong> A few levels were adjusted from the original starting points during the first real test — table below reflects the request for backing vocals; the exact numbers aren't fully settled yet, still being dialed in over the next few services.</div>
 <div class="iem-mix">
 <div class="iem-title">Each row = a source bus's own send into B10 · all PRE-fader · Limiter –6dB · → AES50 Out 3 → SD16 Out 3 → P2 #2</div>
 <div class="iem-row"><span class="iem-src">Bass bus (own instrument) → send into B10</span><span class="iem-lvl" style="color:#1D9E75">0 dB — own instrument</span></div>
@@ -665,15 +682,16 @@ const IEM_STATIC=[
 <div class="iem-row"><span class="iem-src">TALK B — Keys MD (IN38) → direct channel send into B10</span><span class="iem-lvl" style="color:#1D9E75">Cue level — MD talking to the band</span></div>
 <div class="iem-row"><span class="iem-src">Drums bus (B5–6) → send into B10</span><span class="iem-lvl" style="color:#1D9E75">–3 dB — groove lock</span></div>
 <div class="iem-row"><span class="iem-src">Lead vocal (IN1, –6dBFS limiter) → direct channel send into B10</span><span class="iem-lvl" style="color:#BA7517">–6 dB — medium</span></div>
+<div class="iem-row"><span class="iem-src">Backing vocals bus (B1–2) → send into B10</span><span class="iem-lvl">–8 dB — new, added by request · starting point, not yet fully settled</span></div>
 <div class="iem-row"><span class="iem-src">Keys 1 bus + Keys 2 bus → send into B10</span><span class="iem-lvl">–9 dB — low</span></div>
 <div class="iem-row"><span class="iem-src">Click track (IN37)</span><span class="iem-lvl" style="color:#A32D2D">No send into B10 — drummer's reference only</span></div>
 </div>
 <div class="card"><div class="card-title">Why this balance</div>
-<div class="card-body">Bass and drums form the rhythmic foundation — both clearly audible so the bassist can lock note timing precisely with the kit. Click deliberately has no send into B10 — the bassist follows the drummer's feel, keeping one single timing reference for the whole band rather than two competing ones.</div></div>`
+<div class="card-body">Bass and drums form the rhythmic foundation — both clearly audible so the bassist can lock note timing precisely with the kit. Click deliberately has no send into B10 — the bassist follows the drummer's feel, keeping one single timing reference for the whole band rather than two competing ones. Backing vocals added at the same low level as Keys 1/2 already use, matching established convention.</div></div>`
 },
 {id:'keys1',label:'🎹 B11–12 Keys 1 IEM',html:`
 <div class="sl">B11–12 — Keys 1's IEM mix <span style="font-weight:400;color:var(--color-text-tertiary)">· stereo, active</span></div>
-<div class="success"><strong>Now live in stereo.</strong> B11 (L) → SD16 Out 4, B12 (R) → SD16 Out 5, both to P1 #3. Every send below is mirrored onto both buses at the same level — this is a genuine stereo feed now, not the mono placeholder it was.</div>
+<div class="success"><strong>Now live in stereo, and live-tested.</strong> B11 (L) → SD16 Out 4, B12 (R) → SD16 Out 5, both to P1 #3. A few levels were adjusted from the starting points during the first real test — not fully settled yet, still being dialed in.</div>
 <div class="iem-mix">
 <div class="iem-title">Each row = a source bus's own send, mirrored into B11 (L) and B12 (R) · all PRE-fader · Limiter –6dB on both · → AES50 Out 4/5 → SD16 Out 4/5 → P1 #3</div>
 <div class="iem-row"><span class="iem-src">Keys 1 bus (own instrument) → send into B11 + B12</span><span class="iem-lvl" style="color:#1D9E75">0 dB — own instrument</span></div>
@@ -693,6 +711,7 @@ const IEM_STATIC=[
 },
 {id:'keys2',label:'🎹 B13 Keys 2 IEM',html:`
 <div class="sl">B13 — Keys 2's IEM mix</div>
+<div class="tip"><strong>Not yet live-tested.</strong> Drummer, Bass, and Keys 1 have all had a first real test — Keys 2 is next, hopefully within the next couple of weeks. Levels below are the original starting points, unconfirmed against a real player.</div>
 <div class="iem-mix">
 <div class="iem-title">Each row = a source bus's own send into B13 · all PRE-fader · Limiter –6dB · → AES50 Out 6 → SD16 Out 6 → P2 #4</div>
 <div class="iem-row"><span class="iem-src">Keys 2 bus (own instrument) → send into B13</span><span class="iem-lvl" style="color:#1D9E75">0 dB — own instrument</span></div>
@@ -738,6 +757,7 @@ const SECTIONS=[
   {id:'consolemap',label:'🖥️ Console Map',group:'sound'},
   {id:'overview',label:'🗺️ Overview',group:'sound'},
   {id:'rack',label:'🏗️ Rack',group:'sound'},
+  {id:'pas225x',label:'📡 PAS-225X Antenna',group:'sound'},
   {id:'local',label:'🎚️ Inputs IN1–24',group:'sound'},
   {id:'sd16',label:'📦 SD16 IN25–40',group:'sound'},
   {id:'outputs',label:'🔊 Outputs',group:'sound'},
@@ -763,6 +783,7 @@ const SECTIONS=[
   {id:'speakers',label:'🔊 RCF Speakers',group:'sound'},
   {id:'network',label:'🌐 Network',group:'sound'},
   {id:'obsintegration',label:'🔗 OBS Integration',group:'integration'},
+  {id:'dawstage',label:'🎛️ DAW Live Processing',group:'integration'},
   {id:'obsflow',label:'📹 Signal Flow',group:'obs'},
   {id:'obsscenes',label:'📹 Scenes',group:'obs'},
   {id:'obsaudio',label:'📹 Audio Config',group:'obs'},
@@ -776,6 +797,8 @@ const SECTIONS=[
   {id:'record',label:'🎙️ Multitrack Recording',group:'sound'},
   {id:'fx',label:'🌀 FX Rack',group:'sound'},
   {id:'explore',label:'🔭 Features to Explore',group:'sound'},
+  {id:'wishlist',label:'🛒 Future Purchases',group:'sound'},
+  {id:'feedback',label:'🔁 Feedback Troubleshooting',group:'sound'},
   {id:'checklist',label:'✅ Checklist',group:'sound'},
   {id:'gaps',label:'⚠️ Not considered',group:'sound'},
 ];
@@ -1013,7 +1036,7 @@ function buildContent(id){
   if(eqMap[id]){const chs=CDATA[eqMap[id]]||[];return`<div class="ch-grid">${chs.map(ch=>mkCard('eq-'+ch.id,ch.title,ch.sub,ch.ac,ch.color,ch.bands,ch.comp,ch.gate)).join('')}</div>`;}
   const iemSec=IEM_STATIC.find(s=>s.id===id);
   if(iemSec)return iemSec.html;
-  const fn={start:startHTML,consolemap:consoleMapHTML,overview:overviewHTML,rack:rackHTML,local:localHTML,sd16:sd16HTML,outputs:outputsHTML,buses:busesHTML,talkback:talkbackHTML,panning:panningHTML,sends:sendsHTML,gain:gainHTML,network:networkHTML,obsintegration:obsIntegrationHTML,obsflow:obsFlowHTML,obsscenes:obsScenesHTML,obsaudio:obsAudioHTML,obssettings:obsSettingsHTML,obsplugins:obsPluginsHTML,freeshow:freeshowHTML,obscomms:obsCommsHTML,obsgear:obsGearHTML,obschecklist:obsChecklistHTML,scenes:scenesHTML,record:recordHTML,fx:fxHTML,limiters:limitersHTML,speakers:speakersHTML,explore:exploreHTML,checklist:checklistHTML,gaps:gapsHTML};
+  const fn={start:startHTML,consolemap:consoleMapHTML,overview:overviewHTML,rack:rackHTML,pas225x:pas225xHTML,local:localHTML,sd16:sd16HTML,outputs:outputsHTML,buses:busesHTML,talkback:talkbackHTML,panning:panningHTML,sends:sendsHTML,gain:gainHTML,network:networkHTML,obsintegration:obsIntegrationHTML,dawstage:dawStageHTML,obsflow:obsFlowHTML,obsscenes:obsScenesHTML,obsaudio:obsAudioHTML,obssettings:obsSettingsHTML,obsplugins:obsPluginsHTML,freeshow:freeshowHTML,obscomms:obsCommsHTML,obsgear:obsGearHTML,obschecklist:obsChecklistHTML,scenes:scenesHTML,record:recordHTML,fx:fxHTML,limiters:limitersHTML,speakers:speakersHTML,explore:exploreHTML,wishlist:wishlistHTML,feedback:feedbackHTML,checklist:checklistHTML,gaps:gapsHTML};
   return fn[id]?fn[id]():'';
 }
 
@@ -2214,7 +2237,7 @@ function consoleMapHTML(){return`
 <rect x="90" y="100" width="90" height="360" rx="4" fill="#0A0C0E"/><rect x="134.0" y="100" width="2" height="360" fill="#2A2E33"/><rect x="94" y="329.0" width="82" height="22" rx="4" fill="#534AB7" stroke="#fff" stroke-width="1.5"/><text x="135.0" y="346.0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">-6</text><rect x="104.8" y="470" width="60.4" height="20" rx="4" fill="#F1EFE9" stroke="#D8D4C8" stroke-width="1"/><text x="135.0" y="484" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#3D3A30" text-anchor="middle">BV (B1-2)</text><rect x="194" y="100" width="90" height="360" rx="4" fill="#0A0C0E"/><rect x="238.0" y="100" width="2" height="360" fill="#2A2E33"/><rect x="198" y="359.0" width="82" height="22" rx="4" fill="#0F6E56" stroke="#fff" stroke-width="1.5"/><text x="239.0" y="376.0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">-7</text><rect x="203.2" y="470" width="71.6" height="20" rx="4" fill="#F1EFE9" stroke="#D8D4C8" stroke-width="1"/><text x="239.0" y="484" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#3D3A30" text-anchor="middle">Band (B3-4)</text><rect x="298" y="100" width="90" height="360" rx="4" fill="#0A0C0E"/><rect x="342.0" y="100" width="2" height="360" fill="#2A2E33"/><rect x="302" y="329.0" width="82" height="22" rx="4" fill="#185FA5" stroke="#fff" stroke-width="1.5"/><text x="343.0" y="346.0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">-6</text><rect x="304.4" y="470" width="77.19999999999999" height="20" rx="4" fill="#F1EFE9" stroke="#D8D4C8" stroke-width="1"/><text x="343.0" y="484" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#3D3A30" text-anchor="middle">Drums (B5-6)</text><rect x="402" y="100" width="90" height="360" rx="4" fill="#0A0C0E"/><rect x="446.0" y="100" width="2" height="360" fill="#2A2E33"/><rect x="406" y="359.0" width="82" height="22" rx="4" fill="#854F0B" stroke="#fff" stroke-width="1.5"/><text x="447.0" y="376.0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">-7</text><rect x="414.0" y="470" width="66.0" height="20" rx="4" fill="#F1EFE9" stroke="#D8D4C8" stroke-width="1"/><text x="447.0" y="484" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#3D3A30" text-anchor="middle">Horns (B7)</text><rect x="506" y="100" width="90" height="360" rx="4" fill="#0A0C0E"/><rect x="550.0" y="100" width="2" height="360" fill="#2A2E33"/><rect x="510" y="149.0" width="82" height="22" rx="4" fill="#993556" stroke="#fff" stroke-width="1.5"/><text x="551.0" y="166.0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">0</text><rect x="515.2" y="470" width="71.6" height="20" rx="4" fill="#F1EFE9" stroke="#D8D4C8" stroke-width="1"/><text x="551.0" y="484" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#3D3A30" text-anchor="middle">Speech (B8)</text>
 </svg>
 <div style="margin:0 0 6px"><strong style="font-family:'Space Grotesk',sans-serif;font-size:13px;color:#1F2420">Bus → Main LR vs Bus → Matrix — genuinely different sends, not the same value</strong></div>
-<div style="margin:0 0 8px;font-size:11px;color:#5B5A52">Solid bar = send to Main LR (the room). Dashed/lighter bar = send to Matrix (the stream). Notice Speech is pulled back slightly for the room but actually <strong>boosted</strong> for the stream — Matrix already favors speech intelligibility on the recording.</div>
+<div style="margin:0 0 8px;font-size:11px;color:#5B5A52">Solid bar = send to Main LR (the room). Dashed/lighter bar = send to Matrix (the stream). Two different reasons drive the gaps here: <strong>Speech</strong> is pulled back slightly for the room but <strong>boosted</strong> for the stream — Matrix already favors speech intelligibility on the recording. <strong>Drums and Horns go the other way</strong> — pulled back further on Matrix than Main — because close-mic'd, transient-heavy sources read as more forward on a clean stream feed than they do live, where natural acoustic bleed and room reflections soften and blend them. Same source, two genuinely different listening environments.</div>
 <svg viewBox="0 0 730 545" style="width:100%;max-width:730px;height:auto;display:block;margin:0 0 1.5rem" xmlns="http://www.w3.org/2000/svg">
 <rect x="0" y="0" width="730" height="545" fill="#FFFFFF"/>
 <line x1="70" y1="183.1" x2="700" y2="183.1" stroke="#B8862F" stroke-width="1.5" stroke-dasharray="6,4"/>
@@ -2401,6 +2424,48 @@ function obsIntegrationHTML(){return`
 <li><div class="sn">5</div><div class="at">Leave the UGREEN USB cable physically connected as a fallback until Dante's been proven reliable over a few real services — don't remove the safety net on day one</div></li>
 <li><div class="sn">6</div><div class="at">Once confident: this becomes the new default, and the USB path becomes the documented fallback instead of the primary — update the Network tab's status column when that happens</div></li>
 </ul>`;}
+
+function dawStageHTML(){return`
+<div class="danger"><strong>This is a documented, ready-to-use option — not what's currently running.</strong> Today, WING's Matrix feed goes straight into OBS via USB, unchanged. This page exists so the setup is ready the moment it's actually needed, without figuring it out live.</div>
+
+<div class="sl">The problem this solves, in one sentence</div>
+<div class="tip">Every bus's EQ and Compression is genuinely shared between Main LR and Matrix — only the send <em>level</em> differs. If a bus ever needs a real tonal difference for the stream specifically, not just a volume difference, this is how to get it — without spending one of the 2 remaining spare WING buses on a duplicate.</div>
+
+<div class="sl">The architecture</div>
+<div class="card"><div class="card-body">
+<strong>WING → USB → Stream Mac</strong> (unchanged, already documented in Network tab) → <strong>Logic Pro</strong>, a live input channel monitoring WING's USB channels 1–2 (Matrix L/R, confirmed — the same channels already feeding OBS directly today) → <strong>plugins inserted live</strong> on that channel (EQ, Compression, a broadcast-style Limiter) → Logic's output routed through a <strong>virtual audio device</strong> (BlackHole or Loopback) → <strong>OBS's Mic/Aux source</strong>, pointed at that virtual device instead of WING's raw USB interface.
+</div></div>
+<div class="success">Logic Pro is already running on the Stream Mac for multitrack recording (see Multitrack Recording tab) — this isn't new software, it's pointing an existing tool at a job it isn't doing yet.</div>
+
+<div class="sl">Setup — Logic Pro side</div>
+<ul class="step-list">
+<li><div class="sn">1</div><div class="at">Create a new <strong>audio track</strong> in Logic, separate from the multitrack recording tracks already documented</div></li>
+<li><div class="sn">2</div><div class="at">Set its input to WING's USB <strong>channels 1–2</strong> (Matrix L/R)</div></li>
+<li><div class="sn">3</div><div class="at">Turn on <strong>Input Monitoring</strong> for that track — this is a live-processing channel, not something being recorded</div></li>
+<li><div class="sn">4</div><div class="at">Insert plugins on the channel: <strong>Channel EQ</strong> first, then a <strong>Compressor</strong>, then an <strong>Adaptive Limiter</strong> (or equivalent) last in the chain, as a broadcast-style safety ceiling — same "protect first, shape second" logic already used throughout the WING side of this system</div></li>
+<li><div class="sn">5</div><div class="at">Keep this channel's own fader near unity — the plugins do the shaping, the fader isn't meant to be a second volume control fighting WING's own levels</div></li>
+</ul>
+
+<div class="sl">Setup — routing Logic's output to OBS</div>
+<ul class="step-list">
+<li><div class="sn">1</div><div class="at">Install a virtual audio device — <strong>BlackHole</strong> (free) or <strong>Loopback</strong> (paid, more flexible) — since Logic's output doesn't normally feed another app's input directly</div></li>
+<li><div class="sn">2</div><div class="at">Set Logic's main output to the virtual device instead of (or in addition to) the Mac's normal speakers</div></li>
+<li><div class="sn">3</div><div class="at">In OBS, change the existing <strong>Mic/Aux</strong> source's device from WING's raw USB interface to the <strong>virtual audio device</strong> — same track, same filters already set up in OBS, just a different upstream device feeding it now</div></li>
+<li><div class="sn">4</div><div class="at">Confirm levels are moving in OBS's audio mixer on Mic/Aux, same test as every previous audio-path change in this system</div></li>
+</ul>
+
+<div class="sl">The real costs — not just the upside</div>
+<table class="rt"><tr><th>Cost</th><th>Detail</th></tr>
+<tr><td>Latency</td><td>An extra processing stage adds a small delay beyond the direct WING→OBS path — usually manageable with a low buffer size in Logic's audio settings, but a genuine technical cost, not zero</td></tr>
+<tr><td>One more thing that must work</td><td>Another app running, another routing layer, another potential point of failure — for one volunteer already managing WING and OBS alone</td></tr>
+<tr><td>Not for live mixing</td><td>Reasonable as fixed, "set and forget" plugins sitting passively. Actively riding a third mix live, on top of the console and OBS, generally isn't realistic for a single operator</td></tr>
+</table>
+
+<div class="sl">When to actually implement this</div>
+<div class="danger"><strong>The trigger: after actually listening critically to a few real service recordings</strong>, if Matrix's own onboard EQ and limiter genuinely aren't getting the stream to sound right — not before. This page being ready doesn't mean it should be built preemptively.</div>
+
+<div class="sl">Switch-over safety</div>
+<div class="tip">Same pattern as the Dante switch-over already documented: keep the direct WING→OBS USB path easy to revert to. Don't remove the option to point OBS's Mic/Aux straight back at WING's interface until this DAW stage has proven reliable over a few real services.</div>`;}
 
 function obsFlowHTML(){return`<div class="obs-tab">
 <div class="obs-banner">📹 STREAMING &amp; OBS — separate domain from the sound system, connected via the Integration tab</div>
@@ -2641,7 +2706,126 @@ function obsChecklistHTML(){return`<div class="obs-tab">
 </table>
 </div>`;}
 
+function wishlistHTML(){return`
+<div class="success"><strong>A running wishlist, not a purchase order.</strong> Specs and prices below are confirmed directly from Phenyx Pro's UK store at the time each was added — worth a quick re-check before actually buying, since both can drift.</div>
+
+<div class="danger"><strong>Before adding any of these: frequency coordination with the existing wireless system.</strong> All three sit in the 500–600MHz UHF range, overlapping the frequency territory of the PTU-4000 and PTU-7000-4B already in the rack (541MHz nominal). Adding any of these means a proper frequency scan across everything running simultaneously — this connects directly to the wireless frequency scan and Ofcom PMSE licensing items already flagged on the Not Considered tab, not a separate concern.</div>
+
+<div class="card"><div class="card-title">PTAU-2 — Dual-Channel True Diversity System <span style="font-weight:400;color:#6B7280">· £394.99</span></div>
+<div class="card-body">
+<strong>What it is:</strong> a genuine step up from the current wireless, not just more of the same — true diversity circuitry (two independent receiver modules per channel, always picking the strongest signal), an ID Lock function that prevents another mic on the same frequency from bleeding in, selectable transmitter power (5/10/30mW), and a built-in spectrum analyzer for finding clean frequencies.<br><br>
+<strong>Where it'd help here:</strong> the ID Lock and true diversity combination is specifically the kind of thing that helps in a room with several wireless systems already running — exactly this church's situation. Worth considering as a quality upgrade for a channel that matters most (Lead vocal or Pastor), not necessarily as a straight replacement for the whole existing system.<br><br>
+<strong>Frequency:</strong> 512–562MHz, 2×1000 selectable frequencies.
+</div></div>
+
+<div class="card"><div class="card-title">PTI-2 — Intelligent Auto-Sync System w/ Talkback <span style="font-weight:400;color:#6B7280">· £216.99</span></div>
+<div class="card-body">
+<strong>What it is:</strong> the simplest of the three to operate — power on and it auto-scans and syncs with no manual tuning. Adaptive RF power (10–30mW) adjusts itself to conditions. Genuinely distinctive feature: a <strong>talkback button built into the handheld mic itself</strong> — press it and it routes audio to the monitor output only, muting the main output automatically.<br><br>
+<strong>Where it'd help here:</strong> that mic-integrated talkback is a different mechanism from this system's existing TALK A/B setup (which uses dedicated channels, not a button on the handheld itself) — worth thinking about whether that's a genuinely useful addition or just a second way of doing something already solved.<br><br>
+<strong>Frequency:</strong> 537–589MHz, 2×100 channels, up to 7 systems simultaneously.
+</div></div>
+
+<div class="card"><div class="card-title">PTU-6000-8H — Eight-Channel System <span style="font-weight:400;color:#6B7280">· £510.99</span></div>
+<div class="card-body">
+<strong>What it is:</strong> a full 8-channel wireless rack unit — 8 handheld mics, 8 individual XLR outputs plus one combined 1/4" mixed output, cardioid capsules, all-metal construction, rack-mountable.<br><br>
+<strong>Where it'd help here:</strong> this is the odd one out of the three — it's not a small addition, it's a genuine expansion or replacement candidate given the existing system already has 12 wireless channels between the PTU-4000 and PTU-7000-4B. Worth being clear before buying whether this is meant to <em>add</em> 8 more channels or <em>replace</em> some of what's already there — those are very different decisions with very different frequency-coordination implications.<br><br>
+<strong>Frequency:</strong> 520–602MHz across 8 sub-bands, up to 2 systems simultaneously.
+</div></div>
+
+<div class="tip">All three are confirmed on Phenyx Pro's actual UK storefront (phenyxpro.com/en-gb), GBP pricing, same site already verified UK-appropriate for the PTU-5200-4H consideration earlier — that part's not a concern here. The open question for all three is frequency coordination and what each is actually meant to solve, not whether they're legitimate UK purchases.</div>`;}
+
+function feedbackHTML(){return`
+<div class="danger"><strong>Real incident, worth remembering:</strong> lapel mic worked perfectly at a different venue one week (speakers spaced far apart), then fed back badly at the normal venue the next — same mic, same gain, same EQ. The room and speaker geometry were the actual variable, not anything on the console.</div>
+
+<div class="sl">What feedback actually is</div>
+<div class="card"><div class="card-body">A mic picks up sound coming out of a speaker, that sound gets amplified and sent back to the same speaker, and the loop reinforces itself faster than it decays — building into a ring or squeal at whatever frequency the loop resonates at. It's fundamentally a <strong>geometry and gain problem</strong>, not something EQ or a gate can fully solve on their own.</div></div>
+
+<div class="sl">Why lapel mics specifically are the most vulnerable mic in this whole system</div>
+<div class="danger">Lapel/lavalier mics are almost always <strong>omnidirectional</strong> — they pick up sound equally from every direction, including straight back out of nearby speakers. This is different from the wireless handhelds elsewhere in this system, which are cardioid and actively reject sound from the sides and rear. A lapel worn on the chest, with no way to aim it away from a speaker, is inherently the highest-risk mic in this setup for exactly this reason.</div>
+
+<div class="sl">The "3:1 rule" — a genuinely useful rule of thumb</div>
+<div class="tip">A mic should sit at least <strong>3 times further from the nearest speaker</strong> than the intended sound source is from the mic. A lapel a few inches from Pastor's mouth, in a room where a speaker is only a few feet away, can violate this rule easily — and a room with speakers positioned differently than usual is exactly the kind of change that can push a previously-fine setup over that line.</div>
+
+<div class="sl">Diagnostic steps, roughly in order of effort</div>
+<ul class="step-list">
+<li><div class="sn">1</div><div class="at"><strong>Check speaker aim, not just position.</strong> Even a few degrees of toe-in, angling speakers away from where Pastor stands, meaningfully cuts direct energy reaching the mic without losing coverage for the room</div></li>
+<li><div class="sn">2</div><div class="at"><strong>Confirm actual distance from Pastor's position to the nearest speaker.</strong> Closer than usual, even by a couple of feet, has an outsized effect on feedback risk — see the 3:1 rule above</div></li>
+<li><div class="sn">3</div><div class="at"><strong>Confirm Gain hasn't drifted above the documented 20–25dB target</strong> for this channel (see Gain staging tab) — running hotter than necessary for extra headroom also means more susceptibility to feedback for the same acoustic conditions</div></li>
+<li><div class="sn">4</div><div class="at"><strong>If it's genuinely ringing at a specific frequency:</strong> a proper ring-out finds and fixes it — full procedure below, not something to improvise in the moment</div></li>
+<li><div class="sn">5</div><div class="at"><strong>Worth checking specifically on this system:</strong> Pastor's EQ already carries a +3dB presence boost at 3.5kHz (see EQ Speech tab) — a very plausible ringing frequency for lapel feedback. The boost itself isn't wrong, it's there for speech clarity, but it's worth knowing it could be riding right on top of wherever this room wants to ring</div></li>
+</ul>
+
+<div class="sl">How to actually ring out a room — the full procedure</div>
+<div class="danger">Do this during setup, never during a live service — it's momentarily loud and unpleasant by design.</div>
+<ul class="step-list">
+<li><div class="sn">1</div><div class="at"><strong>Set up realistically first.</strong> Mic in its actual position — lapel worn normally, Pastor standing where they'd actually stand — with Gain at its normal target (20–25dB, already documented). Ringing out only means something if it reflects real conditions, not an artificially boosted setup</div></li>
+<li><div class="sn">2</div><div class="at"><strong>Get continuous sound into the mic.</strong> Feedback needs a signal to excite the loop — have someone talk continuously and steadily, or hold a sustained "ahh" or "shh" sound. Silence won't reveal anything</div></li>
+<li><div class="sn">3</div><div class="at"><strong>Start Main LR low, and raise it in small steps — 1dB at a time.</strong> Pause after each step and listen carefully</div></li>
+<li><div class="sn">4</div><div class="at"><strong>Stop at the very first hint of ringing</strong> — a specific pitch starting to sustain or "sing," distinct from the voice itself. Stop immediately, don't let it develop into a full howl — pushing past the first hint doesn't teach you anything more</div></li>
+<li><div class="sn">5</div><div class="at"><strong>Identify the exact frequency.</strong> If WING's real-time analyzer (RTA) is available, use it — you'll likely see a clear spike right at the ringing frequency. By ear instead: sweep a narrow boost slowly across the suspected range on that channel's EQ; the ringing will noticeably intensify right as you pass over the exact frequency — that peak is your target</div></li>
+<li><div class="sn">6</div><div class="at"><strong>Apply a narrow, modest cut there</strong> — high-Q (tight bandwidth), maybe –3 to –6dB. The goal is a surgical notch, not reshaping the whole tone. A cut that's too wide makes the voice sound thin or hollow for no extra benefit</div></li>
+<li><div class="sn">7</div><div class="at"><strong>Lower Main LR back down and repeat.</strong> Rooms usually have more than one problem frequency — 2 to 4 rounds is typical. Keep going until Main LR can reach a genuinely usable, appropriately loud level for the room without anything ringing</div></li>
+<li><div class="sn">8</div><div class="at"><strong>Return Main LR to its actual intended operating level</strong> once done — the process involves temporarily pushing louder than normal, but that's not where it should stay</div></li>
+</ul>
+<div class="danger">Real constraint on this specific channel: Pastor's lapel only has <strong>6 EQ bands total</strong>, several already in use (the 200Hz/400Hz cuts, the 3.5kHz presence boost). If a ring-out notch lands near one of those, that existing band may need adjusting rather than adding a fresh one — there's no spare 7th band to reach for.</div>
+
+<div class="danger"><strong>What won't fix this, even though it seems like it should:</strong> the existing gate on this channel (–45dB threshold, see EQ Speech tab) only closes between spoken phrases. It does nothing to prevent feedback while Pastor is actively speaking and the mic is open — that's exactly when feedback happens, so the gate is irrelevant to this specific problem.</div>
+
+<div class="tip">The core lesson from the real incident: <strong>a setup that's fine in one room isn't automatically fine in another</strong> — different speaker spacing, different distances, different room acoustics entirely. Worth a quick feedback check (raise level carefully, listen for the first hint of ringing before a service) any time this system runs somewhere other than its normal room.</div>`;}
+
+function pas225xHTML(){return`
+<div class="success"><strong>Confirmed directly from Phenyx Pro's real PAS-225X manual.</strong> Already sitting in the rack at U12 — this documents what it actually does and how to set it up properly.</div>
+
+<div class="sl">What it actually does</div>
+<div class="card"><div class="card-body">Takes <strong>one pair of directional antennas</strong> (A and B) and splits that single signal out to feed <strong>up to 5 separate dual-channel wireless receivers</strong> — while amplifying the RF to compensate for the signal loss that splitting would otherwise cause. Instead of every receiver needing its own dedicated antenna pair, they all share these two, positioned once and aimed properly.</div></div>
+
+<div class="sl">How it fits this system</div>
+<div class="success"><strong>Confirmed directly from both receivers' real owner's manuals:</strong> the PTU-4000's receiver (PWR-4000) has <strong>4 antenna inputs</strong> (ANT A/B/C/D), not 2 — its 8 channels split across two frequency sub-bands (~540–570MHz and ~910–925MHz), with A/B forming one true-diversity pair for the lower band and C/D forming a second pair for the upper band. The PTU-7000-4B's receiver (PWR-7000) also has 4 antenna inputs (ANT 1–4) — very likely the same 2-pair grouping, though that specific split isn't independently confirmed for this model the way it is for PWR-4000.</div>
+<table class="rt"><tr><th>Receiver</th><th>Antenna inputs</th><th>PAS-225X output pairs needed</th></tr>
+<tr><td>PWR-4000 (PTU-4000)</td><td>4 — A/B + C/D</td><td>2 pairs</td></tr>
+<tr><td>PWR-7000 (PTU-7000-4B)</td><td>4 — likely 2 pairs</td><td>2 pairs</td></tr>
+<tr style="background:rgba(37,99,235,0.05)"><td><strong>Total</strong></td><td><strong>8</strong></td><td><strong>4 of 4 direct pairs</strong></td></tr>
+</table>
+<div class="tip"><strong>This fits, with room to spare.</strong> The PAS-225X provides 4 direct RF output pairs plus a 5th usable via the cascade port — both receivers together need exactly 4 pairs, leaving one pair genuinely free. This depends on PWR-7000 grouping its 4 antennas into 2 diversity pairs the same way PWR-4000 confirmed does — reasonable given the shared product family, but worth a quick physical check against the actual unit if precision matters here.</div>
+
+<div class="sl">Physical setup — the real rules, not general advice</div>
+<div class="danger"><strong>These aren't suggestions — they're the manufacturer's actual installation requirements, and getting them wrong directly costs signal reliability:</strong></div>
+<ul class="step-list">
+<li><div class="sn">1</div><div class="at">Mount both directional antennas on stands, connected to the PAS-225X's Antenna A and Antenna B inputs via BNC</div></li>
+<li><div class="sn">2</div><div class="at">Place the two antennas <strong>at least 1.5 metres apart</strong></div></li>
+<li><div class="sn">3</div><div class="at">Mount them <strong>higher than 1.8 metres</strong></div></li>
+<li><div class="sn">4</div><div class="at">Ensure a <strong>clear line of sight with no obstacles — explicitly including the congregation itself.</strong> People standing between the antennas and the performers is a real, common cause of dropouts, not a minor concern</div></li>
+<li><div class="sn">5</div><div class="at">Face the antennas <strong>toward the microphones/performers</strong>, not toward the congregation or side walls</div></li>
+<li><div class="sn">6</div><div class="at">Connect the PAS-225X's RF outputs to the antenna inputs of each wireless receiver, then power everything on</div></li>
+</ul>
+
+<div class="sl">Wiring a true-diversity receiver correctly — worth getting right</div>
+<div class="tip">If a wireless receiver has <strong>only one</strong> antenna input, either RF Output A or B alone is fine. If it has <strong>two</strong> antenna inputs (true diversity — which this system's receivers are), use <strong>both RF Output A and RF Output B</strong> from the same numbered pair into that one receiver. Using only one side on a true-diversity receiver quietly gives up the reliability that feature exists for.</div>
+
+<div class="sl">Gain — set on the antenna itself, not the receiver box</div>
+<div class="card"><div class="card-body">Each directional antenna has its own small display and +/- buttons, <strong>16 selectable gain levels, up to +8dB</strong>. If signal is weak, increase gain there — and specifically, <strong>increase it further after replacing a cable with a longer one</strong>, since longer cable runs lose more signal along the way and need more gain to compensate. Confirm antennas are actually facing the performers before assuming a gain problem.</div></div>
+
+<div class="sl">Cascading — if 5 dual-channel systems ever isn't enough</div>
+<div class="tip">Connect the <strong>Cascade port</strong> (the first numbered output position, "1," on each side) to the <strong>Antenna input</strong> of a second PAS-225X unit. That port normally works as a regular 5th output — using it for cascade instead trades one output slot for the ability to feed a whole second unit's worth of receivers.</div>
+
+<div class="sl">Specification</div>
+<table class="rt"><tr><th>Spec</th><th>Value</th></tr>
+<tr><td>Frequency range</td><td>400–950 MHz</td></tr>
+<tr><td>Operating range</td><td>Up to 160ft (50m)</td></tr>
+<tr><td>Gain adjustment</td><td>16 levels, up to +8dB, set at the antenna</td></tr>
+<tr><td>Connector type</td><td>BNC, 50Ω, throughout</td></tr>
+<tr><td>Antenna type</td><td>PAS-82, log periodic array, 7.5dBi gain</td></tr>
+<tr><td>DC power outputs</td><td>4 included, reduces the number of separate wall adapters needed for connected receivers</td></tr>
+</table>
+<div class="tip">The 400–950MHz range comfortably covers this system's existing wireless mics — no frequency conflict from the distribution system itself. Actual mic-to-mic frequency coordination is still the separate, already-flagged Ofcom/frequency-scan item in the Not Considered tab.</div>`;}
+
 function checklistHTML(){return`
+
+
+
+
+
+
 
 <div class="sl">Pre-service checklist</div>
 <table class="rt"><tr><th>Check</th><th>✓</th></tr>
