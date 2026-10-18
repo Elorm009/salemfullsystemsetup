@@ -517,7 +517,7 @@ function mkCard(id,title,sub,ac,color,bands,comp,gate){
 const CDATA={
 vocals:[
   {id:'lead',title:'Lead vocal',sub:'IN1 · direct to Main + Matrix (no bus) · Limiter –6dBFS',ac:'#534AB7',color:'rgb(83,74,183)',bands:[{t:'h',f:120},{t:'p',f:250,g:-3},{t:'p',f:500,g:-2},{t:'p',f:1000,g:0},{t:'p',f:3000,g:3,q:1.5},{t:'s',f:10000,g:2}],comp:['3:1','–18dBFS','15ms','15ms','80ms',3,4],gate:[false]},
-  {id:'bv',title:'Backing vocals',sub:'IN2–7 · B1–2 · panning tab for positions',ac:'#534AB7',color:'rgb(83,74,183)',bands:[{t:'h',f:120},{t:'p',f:250,g:-3},{t:'p',f:400,g:-2},{t:'p',f:1200,g:0},{t:'p',f:3000,g:2,q:2},{t:'s',f:10000,g:1.5}],comp:['2.5:1','–18dBFS','20ms','15ms','100ms',3,3],gate:[false]},
+  {id:'bv',title:'Backing vocals',sub:'IN2–7 · B1–2 · panning tab for positions',ac:'#534AB7',color:'rgb(83,74,183)',bands:[{t:'h',f:120},{t:'p',f:250,g:-3},{t:'p',f:400,g:-2},{t:'p',f:1200,g:0},{t:'p',f:3000,g:0,q:2},{t:'s',f:10000,g:0}],comp:['2.5:1','–18dBFS','20ms','15ms','100ms',3,3],gate:[false]},
   {id:'choir',title:'Choir',sub:'IN8 · direct to Main + Matrix (no bus)',ac:'#854F0B',color:'rgb(133,79,11)',bands:[{t:'h',f:150},{t:'p',f:250,g:-3},{t:'p',f:800,g:-2,q:2},{t:'p',f:1500,g:0},{t:'p',f:4000,g:2,q:2},{t:'s',f:10000,g:3}],comp:['2:1','–20dBFS','30ms','20ms','150ms',3,3],gate:[false]},
 ],
 speech:[
@@ -525,19 +525,19 @@ speech:[
 ],
 drums:[
   {id:'kick',title:'Kick drum',sub:'IN25 (SD16 IN1) · B5–6',ac:'#185FA5',color:'rgb(24,95,165)',bands:[{t:'h',f:40},{t:'p',f:70,g:4,q:2},{t:'p',f:300,g:-4,q:1.5},{t:'p',f:1000,g:0},{t:'p',f:4000,g:3,q:2},{t:'s',f:10000,g:-6}],comp:['4:1','–18dBFS','2ms','0ms','50ms',1,5],gate:[true,[['THR','–30dB'],['Range','–60dB'],['Attack','1ms'],['Hold','50ms'],['Release','100ms']]]},
-  {id:'snare',title:'Snare',sub:'IN26 (SD16 IN2) · B5–6',ac:'#185FA5',color:'rgb(24,95,165)',bands:[{t:'h',f:100},{t:'p',f:200,g:3,q:2},{t:'p',f:400,g:-3,q:1.5},{t:'p',f:1500,g:0},{t:'p',f:5000,g:4,q:2},{t:'s',f:10000,g:2}],comp:['3:1','–18dBFS','5ms','0ms','60ms',1,5],gate:[true,[['THR','–35dB'],['Range','–60dB'],['Attack','1ms'],['Hold','50ms'],['Release','150ms']]]},
+  {id:'snare',title:'Snare',sub:'IN26 (SD16 IN2) · B5–6',ac:'#185FA5',color:'rgb(24,95,165)',bands:[{t:'h',f:100},{t:'p',f:200,g:3,q:2},{t:'p',f:400,g:-3,q:1.5},{t:'p',f:1500,g:0},{t:'p',f:5000,g:4,q:2},{t:'s',f:10000,g:0}],comp:['3:1','–18dBFS','5ms','0ms','60ms',1,5],gate:[true,[['THR','–35dB'],['Range','–60dB'],['Attack','1ms'],['Hold','50ms'],['Release','150ms']]]},
   {id:'tom1',title:'Tom 1',sub:'IN27 (SD16 IN3) · B5–6',ac:'#185FA5',color:'rgb(24,95,165)',bands:[{t:'h',f:80},{t:'p',f:120,g:4,q:2},{t:'p',f:400,g:-4,q:1.5},{t:'p',f:1500,g:0},{t:'p',f:3000,g:2,q:2},{t:'s',f:10000,g:0}],comp:['4:1','–18dBFS','5ms','0ms','80ms',3,5],gate:[true,[['THR','–30dB'],['Range','–60dB'],['Attack','2ms'],['Hold','200ms'],['Release','300ms']]]},
   {id:'tom2',title:'Tom 2',sub:'IN28 (SD16 IN4) · B5–6',ac:'#185FA5',color:'rgb(24,95,165)',bands:[{t:'h',f:80},{t:'p',f:100,g:3,q:2},{t:'p',f:400,g:-4,q:1.5},{t:'p',f:1500,g:0},{t:'p',f:3000,g:2,q:2},{t:'s',f:10000,g:0}],comp:['4:1','–18dBFS','5ms','0ms','80ms',3,5],gate:[true,[['THR','–30dB'],['Range','–60dB'],['Attack','2ms'],['Hold','200ms'],['Release','300ms']]]},
   {id:'oh',title:'Overhead',sub:'IN29 (SD16 IN5) · B5–6',ac:'#185FA5',color:'rgb(24,95,165)',bands:[{t:'h',f:200},{t:'p',f:300,g:-2,q:1.5},{t:'p',f:800,g:0},{t:'p',f:3000,g:-3,q:2},{t:'p',f:5000,g:0},{t:'s',f:10000,g:3}],comp:['2:1','–24dBFS','30ms','10ms','200ms',3,2],gate:[false]},
 ],
 band:[
-  {id:'k1',title:'Keys 1 (stereo)',sub:'IN31–32 (SD16 IN7–8) · B3–4',ac:'#0F6E56',color:'rgb(15,110,86)',bands:[{t:'h',f:40},{t:'p',f:200,g:-3,q:1.5},{t:'p',f:400,g:-2,q:1.5},{t:'p',f:1200,g:0},{t:'p',f:3000,g:2,q:2},{t:'s',f:10000,g:2}],comp:['2:1','–18dBFS','20ms','15ms','150ms',3,3],gate:[false]},
-  {id:'k2',title:'Keys 2 (stereo)',sub:'IN33–34 (SD16 IN9–10) · B3–4',ac:'#0F6E56',color:'rgb(15,110,86)',bands:[{t:'h',f:60},{t:'p',f:250,g:-3,q:1.5},{t:'p',f:600,g:0},{t:'p',f:2000,g:2,q:2},{t:'p',f:4500,g:0},{t:'s',f:10000,g:1.5}],comp:['2:1','–18dBFS','25ms','15ms','150ms',3,3],gate:[false]},
-  {id:'b1',title:'Bass Guitar 1',sub:'IN39 (SD16 IN15 Hi-Z) · B3–4',ac:'#534AB7',color:'rgb(83,74,183)',bands:[{t:'h',f:40},{t:'p',f:60,g:3,q:2},{t:'p',f:200,g:-3,q:1.5},{t:'p',f:400,g:0},{t:'p',f:1000,g:2,q:2},{t:'s',f:8000,g:-3}],comp:['3:1','–18dBFS','10ms','10ms','80ms',3,4],gate:[false]},
-  {id:'b2',title:'Bass Guitar 2',sub:'IN40 (SD16 IN16 Hi-Z) · B3–4',ac:'#534AB7',color:'rgb(83,74,183)',bands:[{t:'h',f:40},{t:'p',f:60,g:3,q:2},{t:'p',f:200,g:-3,q:1.5},{t:'p',f:400,g:0},{t:'p',f:1000,g:2,q:2},{t:'s',f:8000,g:-3}],comp:['3:1','–18dBFS','10ms','10ms','80ms',3,4],gate:[false]},
+  {id:'k1',title:'Keys 1 (stereo)',sub:'IN31–32 (SD16 IN7–8) · B3–4',ac:'#0F6E56',color:'rgb(15,110,86)',bands:[{t:'h',f:80},{t:'p',f:200,g:-3,q:1.5},{t:'p',f:400,g:-2,q:1.5},{t:'p',f:1200,g:0},{t:'p',f:3000,g:-1,q:2},{t:'s',f:10000,g:0}],comp:['2:1','–18dBFS','20ms','15ms','150ms',3,3],gate:[false]},
+  {id:'k2',title:'Keys 2 (stereo)',sub:'IN33–34 (SD16 IN9–10) · B3–4',ac:'#0F6E56',color:'rgb(15,110,86)',bands:[{t:'h',f:80},{t:'p',f:250,g:-3,q:1.5},{t:'p',f:600,g:0},{t:'p',f:2000,g:2,q:2},{t:'p',f:4500,g:0},{t:'s',f:10000,g:0}],comp:['2:1','–18dBFS','25ms','15ms','150ms',3,3],gate:[false]},
+  {id:'b1',title:'Bass Guitar 1',sub:'IN39 (SD16 IN15 Hi-Z) · B3–4',ac:'#534AB7',color:'rgb(83,74,183)',bands:[{t:'h',f:40},{t:'p',f:100,g:3,q:2},{t:'p',f:200,g:-3,q:1.5},{t:'p',f:400,g:0},{t:'p',f:1000,g:2,q:2},{t:'s',f:8000,g:-3}],comp:['3:1','–18dBFS','10ms','10ms','80ms',3,4],gate:[false]},
+  {id:'b2',title:'Bass Guitar 2',sub:'IN40 (SD16 IN16 Hi-Z) · B3–4',ac:'#534AB7',color:'rgb(83,74,183)',bands:[{t:'h',f:40},{t:'p',f:100,g:3,q:2},{t:'p',f:200,g:-3,q:1.5},{t:'p',f:400,g:0},{t:'p',f:1000,g:2,q:2},{t:'s',f:8000,g:-3}],comp:['3:1','–18dBFS','10ms','10ms','80ms',3,4],gate:[false]},
   {id:'trumpet',title:'Trumpet',sub:'IN10 · B7 (Horns)',ac:'#854F0B',color:'rgb(133,79,11)',bands:[{t:'h',f:120},{t:'p',f:800,g:-2,q:2},{t:'p',f:1500,g:0},{t:'p',f:2500,g:-3,q:2},{t:'p',f:5000,g:2,q:2},{t:'s',f:12000,g:-2}],comp:['2.5:1','–18dBFS','20ms','10ms','120ms',3,4],gate:[false]},
-  {id:'sax',title:'Sax',sub:'IN11 · B7 (Horns)',ac:'#854F0B',color:'rgb(133,79,11)',bands:[{t:'h',f:80},{t:'p',f:700,g:2,q:2},{t:'p',f:1500,g:0},{t:'p',f:3000,g:-3,q:1.5},{t:'p',f:4500,g:0},{t:'s',f:8000,g:2}],comp:['2.5:1','–18dBFS','25ms','15ms','120ms',3,3],gate:[false]},
-  {id:'flute',title:'Flute',sub:'IN12 · B7 (Horns)',ac:'#854F0B',color:'rgb(133,79,11)',bands:[{t:'h',f:200},{t:'p',f:500,g:-2,q:2},{t:'p',f:1000,g:0},{t:'p',f:2000,g:2,q:2},{t:'p',f:4000,g:0},{t:'s',f:12000,g:4}],comp:['2:1','–20dBFS','30ms','15ms','150ms',3,2],gate:[false]},
+  {id:'sax',title:'Sax',sub:'IN11 · B7 (Horns)',ac:'#854F0B',color:'rgb(133,79,11)',bands:[{t:'h',f:80},{t:'p',f:700,g:2,q:2},{t:'p',f:1500,g:0},{t:'p',f:3000,g:-3,q:1.5},{t:'p',f:4500,g:0},{t:'s',f:8000,g:0}],comp:['2.5:1','–18dBFS','25ms','15ms','120ms',3,3],gate:[false]},
+  {id:'flute',title:'Flute',sub:'IN12 · B7 (Horns)',ac:'#854F0B',color:'rgb(133,79,11)',bands:[{t:'h',f:200},{t:'p',f:500,g:-2,q:2},{t:'p',f:1000,g:0},{t:'p',f:2000,g:2,q:2},{t:'p',f:4000,g:0},{t:'s',f:12000,g:0}],comp:['2:1','–20dBFS','30ms','15ms','150ms',3,2],gate:[false]},
 ],
 buses:[
   {id:'bbv',title:'BV bus',sub:'B1–2 → Main LR –3dB · Matrix –2dB · 8-band, confirmed from console',ac:'#534AB7',color:'rgb(83,74,183)',bands:[{t:'s',f:100,g:1,d:'low'},{t:'p',f:150,g:1,q:2},{t:'p',f:250,g:-2,q:1.5},{t:'p',f:550,g:-1,q:1.5},{t:'p',f:1500,g:0},{t:'p',f:3000,g:2,q:2},{t:'p',f:6000,g:-0.5,q:2},{t:'s',f:10000,g:1,d:'high'}],comp:['2:1','–20dBFS','30ms','15ms','150ms',3,2],gate:[false]},
@@ -558,7 +558,7 @@ room:[
 /* ===== IEM / AUX deep-dive data (merged from aux_iem_full_breakdown_v2.html) ===== */
 const IEM_STATIC=[
 {id:'concept',label:'📖 The concept',html:`
-<div class="danger"><strong>Update: IEM has moved off the AUX buses entirely.</strong> AUX 1–8 are now fully free. The 4 monitor mixes live on spare MIX buses instead (B9, B10, B11, B13), fed via Bus→Bus sends from the FOH buses — the same "BUS → BUS" screen visible on your WING CONFIG page.</div>
+<div class="danger"><strong>Update: IEM has moved off the AUX buses entirely.</strong> AUX 1–8 are now free (they accept bus sources only, so they suit bus-level feeds, not single-channel sends). The 4 monitor mixes live on spare MIX buses instead (B9, B10, B11, B13), fed via Bus→Bus sends from the FOH buses — the same "BUS → BUS" screen visible on your WING CONFIG page.</div>
 
 <div class="sl">The actual signal path — using the Drums bus as the example</div>
 <div class="flow-row"><span class="fp hi">Drums bus (B5–6)</span></div>
@@ -573,7 +573,7 @@ const IEM_STATIC=[
 <div class="card-body">CONFIG → the <span class="wp">BUS → BUS</span> screen → set the destination field to <strong>B9</strong> (IEM Drummer) → every one of the 16 buses appears as a row with its own send button into B9. Find the Drums bus row and set its level — done once for the whole kit.</div></div>
 
 <div class="card"><div class="card-title">Why move off AUX</div>
-<div class="card-body">Regular mix buses get the exact same processing (EQ, dynamics, limiter) as any FOH bus, so nothing is lost by using them for monitor mixes. It also frees all 8 AUX buses for other future uses, and keeps everything — FOH buses and monitor buses alike — inside the one workflow you already use daily (CONFIG → BUS/MAIN → BUS → BUS).</div></div>
+<div class="card-body">Regular mix buses get the exact same processing (EQ, dynamics, limiter) as any FOH bus, so nothing is lost by using them for monitor mixes. It also lets you send any single channel straight into a monitor mix, which AUX cannot do because AUX only takes bus sources. It also frees all 8 AUX channels for bus-level future uses, and keeps everything — FOH buses and monitor buses alike — inside the one workflow you already use daily (CONFIG → BUS/MAIN → BUS → BUS).</div></div>
 
 <div class="card"><div class="card-title">Click track is no longer an exception</div>
 <div class="card-body">Click (IN37) still never touches Main LR. But since B9, B10, B11, and B13 are ordinary mix buses, Click now reaches the drummer's mix with a completely normal <strong>channel → bus send</strong>, the same mechanism every channel already uses to reach any bus — set directly from Click's own channel strip, no special case required.</div></div>
@@ -765,6 +765,7 @@ const SECTIONS=[
   {id:'talkback',label:'🎙️ Talkback',group:'sound'},
   {id:'gain',label:'📈 Gain staging — do this FIRST',group:'sound'},
   {id:'sends',label:'📊 Send levels',group:'sound'},
+  {id:'faders',label:'🎚️ Fader levels',group:'sound'},
   {id:'panning',label:'🎯 Panning',group:'sound'},
   {id:'concept',label:'📖 IEM: The concept',group:'sound'},
   {id:'wing_setup',label:'⚙️ IEM: WING setup steps',group:'sound'},
@@ -779,6 +780,7 @@ const SECTIONS=[
   {id:'eq_band',label:'EQ 🎹 Band',group:'sound'},
   {id:'eq_buses',label:'EQ 🔀 Buses',group:'sound'},
   {id:'eq_room',label:'EQ 🏛️ Room mics',group:'sound'},
+  {id:'eqmap',label:'EQ 🗺️ Freq map',group:'sound'},
   {id:'limiters',label:'🛡️ Limiters',group:'sound'},
   {id:'speakers',label:'🔊 RCF Speakers',group:'sound'},
   {id:'network',label:'🌐 Network',group:'sound'},
@@ -1008,7 +1010,7 @@ function startHTML(){return`
 <table class="rt"><tr><th>Term</th><th>Plain-English meaning</th></tr>
 <tr><td><strong>Channel</strong></td><td>One single input — one mic, one instrument. Channel 1, Channel 2, etc.</td></tr>
 <tr><td><strong>Bus</strong></td><td>A shared "lane" that several channels can be mixed into together, so they can be controlled with one fader instead of many. E.g. all 6 backing vocal mics feed one "BV bus."</td></tr>
-<tr><td><strong>AUX</strong></td><td>A separate set of 8 mini-buses, historically used for monitor mixes. This system doesn't use them for that anymore — see the IEM tabs for why.</td></tr>
+<tr><td><strong>AUX</strong></td><td>8 stereo AUX input channels (4-band EQ, one FX insert). Their source can be a bus but not an individual input channel (as observed on our unit), so they suit bus-level feeds rather than per-instrument IEM sends. IEM uses spare numbered buses instead — see the IEM tabs.</td></tr>
 <tr><td><strong>Matrix</strong></td><td>A special bus that feeds things outside the room — the lobby speakers and the livestream.</td></tr>
 <tr><td><strong>Main LR</strong></td><td>The bus that feeds the room's main speakers — what the congregation hears.</td></tr>
 <tr><td><strong>Send</strong></td><td>A copy of a channel or bus's signal, routed to somewhere else (another bus, Main, Matrix), at its own independent level.</td></tr>
@@ -1036,7 +1038,7 @@ function buildContent(id){
   if(eqMap[id]){const chs=CDATA[eqMap[id]]||[];return`<div class="ch-grid">${chs.map(ch=>mkCard('eq-'+ch.id,ch.title,ch.sub,ch.ac,ch.color,ch.bands,ch.comp,ch.gate)).join('')}</div>`;}
   const iemSec=IEM_STATIC.find(s=>s.id===id);
   if(iemSec)return iemSec.html;
-  const fn={start:startHTML,consolemap:consoleMapHTML,overview:overviewHTML,rack:rackHTML,pas225x:pas225xHTML,local:localHTML,sd16:sd16HTML,outputs:outputsHTML,buses:busesHTML,talkback:talkbackHTML,panning:panningHTML,sends:sendsHTML,gain:gainHTML,network:networkHTML,obsintegration:obsIntegrationHTML,dawstage:dawStageHTML,obsflow:obsFlowHTML,obsscenes:obsScenesHTML,obsaudio:obsAudioHTML,obssettings:obsSettingsHTML,obsplugins:obsPluginsHTML,freeshow:freeshowHTML,obscomms:obsCommsHTML,obsgear:obsGearHTML,obschecklist:obsChecklistHTML,scenes:scenesHTML,record:recordHTML,fx:fxHTML,limiters:limitersHTML,speakers:speakersHTML,explore:exploreHTML,wishlist:wishlistHTML,feedback:feedbackHTML,checklist:checklistHTML,gaps:gapsHTML};
+  const fn={start:startHTML,consolemap:consoleMapHTML,overview:overviewHTML,rack:rackHTML,pas225x:pas225xHTML,local:localHTML,sd16:sd16HTML,outputs:outputsHTML,buses:busesHTML,talkback:talkbackHTML,panning:panningHTML,sends:sendsHTML,faders:fadersHTML,gain:gainHTML,network:networkHTML,obsintegration:obsIntegrationHTML,dawstage:dawStageHTML,obsflow:obsFlowHTML,obsscenes:obsScenesHTML,obsaudio:obsAudioHTML,obssettings:obsSettingsHTML,obsplugins:obsPluginsHTML,freeshow:freeshowHTML,obscomms:obsCommsHTML,obsgear:obsGearHTML,obschecklist:obsChecklistHTML,scenes:scenesHTML,record:recordHTML,fx:fxHTML,eqmap:eqMapHTML,limiters:limitersHTML,speakers:speakersHTML,explore:exploreHTML,wishlist:wishlistHTML,feedback:feedbackHTML,checklist:checklistHTML,gaps:gapsHTML};
   return fn[id]?fn[id]():'';
 }
 
@@ -1304,7 +1306,7 @@ function outputsHTML(){return`
 </table>`;}
 
 function busesHTML(){return`
-<div class="success"><strong>9 of 16 mix buses used for FOH + 5 for IEM (Keys 1 stereo) = 14 · 2 spare (B14, B15) · AUX 1–8 fully free · TALK A+B = zero AUX consumed</strong></div>
+<div class="success"><strong>9 of 16 mix buses used for FOH + 5 for IEM (Keys 1 stereo) = 14 · 2 spare (B14, B15) · AUX 1–8 free (bus-fed only) · TALK A+B = zero AUX consumed</strong></div>
 <div class="tip"><strong>Lead vocal and Choir no longer have dedicated buses.</strong> Both are single mono channels — a bus only earns its keep when it's grouping multiple channels (shared EQ/dynamics, one fader for several mics) or feeding a monitor mix. Neither applied here, so IN1 and IN8 now route straight to Main LR + Matrix from the channel strip, same net sound, two fewer buses spent. Pastor's bus stays, but is now a general-purpose <strong>Speech bus</strong> rather than a Pastor-only one — any future speaking mic (guest speaker, announcements) can be assigned to B8 alongside the lapel.</div>
 <div class="sl">Mix buses — FOH</div>
 <div class="bus-grid">
@@ -1329,7 +1331,7 @@ function busesHTML(){return`
 <div class="bc" style="--ac:#0369A1"><div class="bc-num">B13</div><div class="bc-name">Keys 2 IEM</div><div class="bc-meta">Mono · Fed by Bus→Bus sends from Keys 2 bus/Keys 1/B1–2/Horns + direct Leader (IN1) send · → AES50 Out 6 → P2 #4</div></div>
 </div>
 <div class="tip"><strong>2 mix buses spare (B14, B15)</strong> — both isolated (neighbours on both sides are already in use), so each can only be a mono spare, not part of a future stereo pair, unless a neighbouring bus is freed too.</div>
-<div class="sl">AUX buses — fully free</div>
+<div class="sl">AUX channels — free, but bus-fed only</div>
 <div class="aux-visual">
 <div class="av sys-s"><div class="num">System</div><div class="name">USB 1/2</div><div class="sub">Stream out</div></div>
 <div class="av sys-s"><div class="num">System</div><div class="name">2TR</div><div class="sub">Playback return</div></div>
@@ -1342,6 +1344,10 @@ function busesHTML(){return`
 <div class="av spare-s"><div class="num">AUX 7</div><div class="name">Spare</div><div class="sub">Future</div></div>
 <div class="av spare-s"><div class="num">AUX 8</div><div class="name">Spare</div><div class="sub">Future</div></div>
 </div>
+<div class="danger"><strong>AUX channels only accept buses as a source.</strong> On our unit (tested by DT), an individual input channel cannot be sent to an AUX channel. That makes AUX the wrong tool for "put just the keys into one person's IEM".</div>
+<div class="tip"><strong>Which tool to reach for</strong><br>
+<strong>One instrument or mic to a new destination:</strong> use a spare numbered bus (B14 or B15) with a direct channel send, the same way Lead, Click, Choir and TALK already work. Set the channel send to TAP after Comp, then route the bus out (AES50 or a local output).<br>
+<strong>An existing mix to a new destination:</strong> AUX suits this. Candidates: hearing loop feed, SIP/VoIP caller mix, overflow or lobby mix, extra IEM headroom fed from an existing bus.</div>
 <div class="sl">DCAs + Mute groups</div>
 <table class="rt"><tr><th>DCA</th><th>Controls</th><th>MG</th><th>Kills</th></tr>
 <tr><td>DCA1 Leader</td><td>IN1 (direct, no bus)</td><td>MG1</td><td>Pastor IN9 · B8 Speech</td></tr>
@@ -1933,6 +1939,98 @@ function exploreHTML(){return`
 <div class="card"><div class="card-title">📊 LUFS-standard metering for stream compliance <span class="pill never">Unconfirmed</span></div>
 <div class="card-body">Broadcast-standard loudness metering, which platforms like YouTube reference for normalization. Would be genuinely useful for the stream specifically if available.</div></div>`;}
 
+function eqMapHTML(){
+  const X0=170,W=800,lo=Math.log10(20),span=3;
+  const x=f=>X0+(Math.log10(f)-lo)/span*W;
+  const rows=[['Lead vocal','vocals','lead'],['Backing vocals','vocals','bv'],['Choir','vocals','choir'],['Pastor lapel','speech','pastor'],['Kick','drums','kick'],['Snare','drums','snare'],['Toms','drums','tom1'],['Overhead','drums','oh'],['Keys 1','band','k1'],['Keys 2','band','k2'],['Bass guitar','band','b1'],['Trumpet','band','trumpet'],['Sax','band','sax'],['Flute','band','flute']];
+  const zones=[[20,60,'Sub','#E8EEF7'],[60,250,'Bass / body','#EEF3E8'],[250,500,'Mud','#F7ECE4'],[500,2000,'Mids','#F3F1EA'],[2000,5000,'Presence','#F6E9EE'],[5000,20000,'Air','#EAF1F4']];
+  const top=44,rh=32,H=top+rows.length*rh+34;
+  let o=`<svg viewBox="0 0 1000 ${H}" style="width:100%;height:auto;display:block" font-family="Inter,sans-serif">`;
+  o+=`<rect width="1000" height="${H}" rx="8" fill="#FFFFFF"/>`;
+  zones.forEach(z=>{o+=`<rect x="${x(z[0])}" y="${top-8}" width="${x(z[1])-x(z[0])}" height="${rows.length*rh+8}" fill="${z[3]}"/><text x="${(x(z[0])+x(z[1]))/2}" y="22" font-size="13" font-weight="700" text-anchor="middle" fill="#1F2420">${z[2]}</text>`;});
+  [20,50,100,200,500,1000,2000,5000,10000,20000].forEach(f=>{const t=f>=1000?(f/1000)+'k':f;o+=`<line x1="${x(f)}" x2="${x(f)}" y1="${top-8}" y2="${top+rows.length*rh}" stroke="#C9C5B8" stroke-width="1"/><text x="${x(f)}" y="${top+rows.length*rh+20}" font-size="12" text-anchor="middle" fill="#1F2420">${t}</text>`;});
+  rows.forEach((r,i)=>{
+    const ch=CDATA[r[1]].find(c=>c.id===r[2]);const cy=top+i*rh+rh/2-4;
+    o+=`<text x="${X0-10}" y="${cy+4}" font-size="13" font-weight="600" text-anchor="end" fill="#1F2420">${r[0]}</text>`;
+    o+=`<line x1="${X0}" x2="${X0+W}" y1="${cy}" y2="${cy}" stroke="#D9D6CC" stroke-width="1"/>`;
+    ch.bands.forEach(b=>{
+      if(b.t==='h'){o+=`<rect x="${X0}" y="${cy-7}" width="${x(b.f)-X0}" height="14" fill="#4A4940"/><text x="${X0+5}" y="${cy+4}" font-size="11" font-weight="700" fill="#fff">HPF ${b.f}</text>`;return;}
+      if(!b.g||Math.abs(b.g)<1)return;
+      const up=b.g>0,c=up?'#1D7A4F':'#B3382B';
+      o+=`<circle cx="${x(b.f)}" cy="${cy}" r="8" fill="${c}"/><text x="${x(b.f)}" y="${cy+4}" font-size="10" font-weight="700" text-anchor="middle" fill="#fff">${b.t==='s'?'S':(up?'▲':'▼')}</text><text x="${x(b.f)+11}" y="${cy+4}" font-size="12" font-weight="700" fill="${c}">${up?'+':''}${b.g}</text>`;
+    });
+  });
+  o+=`</svg>`;
+  return`
+<div class="sl">Frequency map — who is boosted or cut where</div>
+<div class="tip">Drawn live from the channel EQ values in the EQ tabs, so it always matches them. <strong style="color:#1D7A4F">Green</strong> = boost, <strong style="color:#B3382B">red</strong> = cut, grey bar = high-pass filter, <strong>S</strong> = shelf. Boosts or cuts under 1 dB are not shown. Bus, Main and Matrix EQ are not drawn.</div>
+<div class="card" style="padding:10px">${o}</div>
+<div class="sl">Who owns each zone</div>
+<table class="rt"><tr><th>Zone</th><th>Owner</th><th>Everyone else</th></tr>
+<tr><td>Sub, below 60 Hz</td><td>Kick only</td><td>High-passed. Keys HPF is now 80 Hz</td></tr>
+<tr><td>60–100 Hz</td><td>Kick thump at 70 Hz</td><td>Bass boost moved up to 100 Hz so it no longer sits on the kick</td></tr>
+<tr><td>100–250 Hz</td><td>Bass body, snare body (200 Hz), toms</td><td>Keys and vocals are cut at 200–250 Hz to keep it clear</td></tr>
+<tr><td>250–500 Hz</td><td>Nobody. This is the mud zone</td><td>Almost every channel and bus is cut here</td></tr>
+<tr><td>0.5–2 kHz</td><td>Horns, bass attack (1 kHz), keys body</td><td>Vocals left flat here</td></tr>
+<tr><td>2–5 kHz presence</td><td>Lead vocal and Pastor (3–3.5 kHz)</td><td>Trumpet and sax cut here. BVs and Keys 1 no longer boosted on their own channels</td></tr>
+<tr><td>Above 5 kHz</td><td>Overhead and choir shelves, plus the lead's +2</td><td>Other 10 kHz shelves set flat</td></tr></table>
+<div class="sl">What changed (applied to the channel values)</div>
+<table class="rt"><tr><th>Channel</th><th>Was</th><th>Now</th><th>Why</th></tr>
+<tr><td>Backing vocals</td><td>+2 at 3 kHz, +1.5 shelf at 10 kHz</td><td>Both flat</td><td>With the BV bus's own +2 they had more presence than the lead</td></tr>
+<tr><td>Keys 1</td><td>HPF 40, +2 at 3 kHz, +2 shelf</td><td>HPF 80, −1 at 3 kHz, shelf flat</td><td>With the Band bus +1.5 it was about +3.5 at 3 kHz, now about +0.5</td></tr>
+<tr><td>Keys 2</td><td>HPF 60, +1.5 shelf</td><td>HPF 80, shelf flat</td><td>Keeps keys out of the bass</td></tr>
+<tr><td>Bass 1 and 2</td><td>+3 at 60 Hz</td><td>+3 at 100 Hz</td><td>Kick owns 70 Hz</td></tr>
+<tr><td>Snare, sax, flute</td><td>10 kHz shelves +2, +2, +4</td><td>Flat</td><td>Air is left to the lead, overhead and choir</td></tr></table>
+<div class="success"><strong>3 kHz after the change:</strong> lead +3 · BVs about +2 (bus only) · Keys 1 about +0.5 · horns cut. The lead is now the most forward thing in the presence range.</div>
+<div class="danger"><strong>These are starting points, not tested settings.</strong> Change them on the console one at a time, with the band playing a full song, and keep any that sound better. If keys lose weight with the 80 Hz HPF, drop it back toward 40–60 Hz. Bus, Main and Matrix EQ were not touched. The Matrix still has +2 at 10 kHz for the stream.</div>
+`;}
+
+function fadersHTML(){
+  const groups=[
+   ['Vocals + speech','#534AB7',[['Lead vocal','IN1',0,'Direct to Main + Matrix. Most prominent, so no headroom pullback'],['Vocals 1–6','IN2–7',-5,'Six voices sum into B1–2'],['Choir','IN8',-4,'Direct to Main + Matrix'],['Pastor lapel','IN9',0,'Rarely coincides with a full-band moment']]],
+   ['Horns','#854F0B',[['Trumpet','IN10',-1,''],['Sax','IN11',-1,''],['Flute','IN12',-3,'Softer tone, watch it getting buried']]],
+   ['Drums','#185FA5',[['Kick','IN25',-1,'Foundation'],['Snare','IN26',-1,'Same as kick'],['Tom 1','IN27',-4,'Only on fills'],['Tom 2','IN28',-4,'Only on fills'],['Overhead','IN29',-6,'Supports the close mics']]],
+   ['Keys + bass','#0F6E56',[['Keys 1 L+R','IN31–32',-1,'Primary keys part'],['Keys 2 L+R','IN33–34',-3,'Usually a supporting pad'],['Bass 1','IN39',-1,'Foundation'],['Bass 2','IN40',-4,'Secondary unless co-equal that week'],['Room music','IN14–15',-8,'Pre-service only']]],
+   ['Buses (FOH)','#B8862F',[['B1–2 Backing vocals','Bus',-6,'Six sources summing'],['B3–4 Band','Bus',-7,'Bed under everything'],['B5–6 Drums','Bus',-6,'Loudest moments'],['B7 Horns','Bus',-7,'Loud when all three play'],['B8 Speech','Bus',0,'Single source']]]
+  ];
+  const lo=-12,hi=2,X0=250,W=700;const x=d=>X0+(d-lo)/(hi-lo)*W;
+  const rh=30;let n=0;groups.forEach(g=>n+=g[2].length+1);
+  const H=n*rh+50;let y=34;
+  let o=`<svg viewBox="0 0 1000 ${H}" style="width:100%;height:auto;display:block" font-family="Inter,sans-serif"><rect width="1000" height="${H}" rx="8" fill="#FFFFFF"/>`;
+  for(let d=-12;d<=2;d+=2){o+=`<line x1="${x(d)}" x2="${x(d)}" y1="24" y2="${H-24}" stroke="${d===0?'#1F2420':'#D9D6CC'}" stroke-width="${d===0?2:1}"/><text x="${x(d)}" y="16" font-size="12" font-weight="700" text-anchor="middle" fill="#1F2420">${d>0?'+'+d:d}</text>`;}
+  groups.forEach(g=>{
+    o+=`<text x="12" y="${y+4}" font-size="13" font-weight="800" fill="${g[1]}">${g[0].toUpperCase()}</text>`;y+=rh;
+    g[2].forEach(r=>{
+      o+=`<text x="${X0-14}" y="${y+4}" font-size="13" text-anchor="end" fill="#1F2420">${r[0]} <tspan fill="#6B6A63" font-size="11">${r[1]}</tspan></text><line x1="${x(0)}" x2="${x(r[2])}" y1="${y}" y2="${y}" stroke="${g[1]}" stroke-width="3" opacity="0.5"/><rect x="${x(r[2])-9}" y="${y-9}" width="18" height="18" rx="4" fill="${g[1]}"/><text x="${r[2]===0?x(0)+16:x(r[2])-14}" y="${y+4}" text-anchor="${r[2]===0?'start':'end'}" font-size="13" font-weight="700" fill="#1F2420">${r[2]===0?'0 (unity)':r[2]}</text>`;y+=rh;
+    });
+  });
+  o+=`</svg>`;
+  const rows=groups.map(g=>g[2].map(r=>`<tr><td>${g[0]}</td><td>${r[0]}</td><td>${r[1]}</td><td style="white-space:nowrap"><strong>${r[2]===0?'0 dB (unity)':r[2]+' dB'}</strong></td><td>${r[3]}</td></tr>`).join('')).join('');
+  return`
+<div class="sl">Starting fader levels — every channel and FOH bus in one place</div>
+<div class="tip">These are <strong>starting points for a fresh mix</strong>, not fixed targets. The fader is the live control and is meant to move through a service. They are the same values as the Send levels tab ("The third piece") and the Console Map, gathered here. Gain comes first: set Gain, put every fader at its start point, then balance by ear.</div>
+<div class="card" style="padding:10px">${o}</div>
+<div class="sl">The same values as a table</div>
+<table class="rt"><tr><th>Group</th><th>Channel / bus</th><th>Input</th><th>Start</th><th>Note</th></tr>${rows}</table>
+<div class="sl">Not on a fader</div>
+<table class="rt"><tr><th>Item</th><th>How its level is set</th></tr>
+<tr><td>Room mics (IN35–36)</td><td>Matrix send at −21 dB. They never go to Main LR</td></tr>
+<tr><td>Click (IN37) and Talkback (IN13, IN38)</td><td>Channel sends into the IEM buses, no FOH fader level</td></tr>
+<tr><td>IEM buses B9–13</td><td>Level set by the sends into them (Send levels tab), so the bus fader is not the control</td></tr>
+<tr><td>Main LR and Matrix</td><td>Live-adjusted, no fixed start. Main LR limiter still needs switching on</td></tr>
+<tr><td>Unused channels</td><td>Left at 0 dB</td></tr></table>
+<div class="sl">If a fader ends up far from its start point</div>
+<div class="danger"><strong>Rule of thumb, not a measured limit:</strong> if you keep pulling a fader more than about 6 dB away from its start for most of a service, the real problem is probably somewhere else. Fixing it there is better than leaving a fader far from where it was designed to sit.</div>
+<table class="rt"><tr><th>What you're seeing</th><th>Check this first</th></tr>
+<tr><td>Channel clips or meters hot</td><td>Gain on that channel (and the receiver volume for wireless mics). A fader can't fix clipping that happens before it</td></tr>
+<tr><td>Fader is far below its start to keep the channel from being too loud</td><td>Gain is probably too high, or the channel is in the wrong bus</td></tr>
+<tr><td>Fader is far above its start to be heard</td><td>Gain is probably too low, or the EQ is cutting what makes it audible. Check the Freq map tab</td></tr>
+<tr><td>A bus or Main LR clips when everything plays</td><td>Summing. Pull the bus faders back toward their starts, then check the Main LR limiter is on</td></tr>
+<tr><td>Lead vocal is clipping</td><td>Gain on IN1 first, not the fader</td></tr>
+<tr><td>A musician's IEM is wrong</td><td>Its send level, not the FOH fader. A bus fader only changes the FOH path</td></tr></table>
+<div class="tip">Faders at their starts is also the quickest reset between services: put them all back, then rebalance for the room.</div>
+`;}
+
 function limitersHTML(){return`
 <div class="danger"><strong>A limiter is not a compressor turned up.</strong> They use the same mechanism, but the job is completely different. A compressor shapes tone continuously — you can hear it working, that's the point. A limiter is a safety net — it should be doing nothing at all until something spikes, and then it clamps hard and gets out of the way. If you can hear a limiter working during normal levels, the threshold is wrong.</div>
 
@@ -1949,41 +2047,24 @@ function limitersHTML(){return`
 
 <div class="sl">Every limiter in this system, in one place</div>
 <table class="rt"><tr><th>Location</th><th>Ceiling</th><th>Ratio</th><th>Protects</th></tr>
-<tr class="room-r"><td>Room mic L + R</td><td>–6dBFS</td><td>10:1</td><td>Against a stray loud sound near an open room mic — no gate, so this is the only safety net they have</td></tr>
-<tr class="drum-r"><td>B9 Drummer IEM</td><td>–6dBFS</td><td>—</td><td>Musicians' ears — in-ears sit in the ear canal, this is non-negotiable on every IEM bus</td></tr>
-<tr class="drum-r"><td>B10 Bass IEM</td><td>–6dBFS</td><td>—</td><td>Same reasoning, every IEM bus without exception</td></tr>
-<tr class="drum-r"><td>B11–12 Keys 1 IEM</td><td>–6dBFS</td><td>—</td><td>Same reasoning, applies to both L and R once stereo-linked</td></tr>
-<tr class="drum-r"><td>B13 Keys 2 IEM</td><td>–6dBFS</td><td>—</td><td>Same reasoning</td></tr>
-<tr class="vox-r"><td>Lead vocal channel (IN1)</td><td>–6dBFS</td><td>—</td><td>Sits before Main LR, Matrix, and all 4 IEM sends split off — one setting protects everything downstream from a single vocal spike, rather than relying on 4+ separate bus limiters reacting independently</td></tr>
-<tr style="background:rgba(146,64,14,0.05)"><td>Main LR</td><td>–3dBFS</td><td>10:1</td><td>The room and the RCF speakers — last line of defense before the signal leaves the console entirely, sits higher than the others since everything feeding it should already be well gain-staged</td></tr>
+<tr class="room-r"><td>Room mic L + R</td><td style="white-space:nowrap">–6dBFS</td><td style="white-space:nowrap">10:1</td><td>Against a stray loud sound near an open room mic — no gate, so this is the only safety net they have</td></tr>
+<tr class="drum-r"><td>B9 Drummer IEM</td><td style="white-space:nowrap">–6dBFS</td><td style="white-space:nowrap">—</td><td>Musicians' ears — in-ears sit in the ear canal, this is non-negotiable on every IEM bus</td></tr>
+<tr class="drum-r"><td>B10 Bass IEM</td><td style="white-space:nowrap">–6dBFS</td><td style="white-space:nowrap">—</td><td>Same reasoning, every IEM bus without exception</td></tr>
+<tr class="drum-r"><td>B11–12 Keys 1 IEM</td><td style="white-space:nowrap">–6dBFS</td><td style="white-space:nowrap">—</td><td>Same reasoning, applies to both L and R once stereo-linked</td></tr>
+<tr class="drum-r"><td>B13 Keys 2 IEM</td><td style="white-space:nowrap">–6dBFS</td><td style="white-space:nowrap">—</td><td>Same reasoning</td></tr>
+<tr class="vox-r"><td>Lead vocal channel (IN1)</td><td style="white-space:nowrap">–6dBFS</td><td style="white-space:nowrap">—</td><td>Sits before Main LR, Matrix, and all 4 IEM sends split off — one setting protects everything downstream from a single vocal spike, rather than relying on 4+ separate bus limiters reacting independently</td></tr>
+<tr style="background:rgba(146,64,14,0.05)"><td>Main LR</td><td style="white-space:nowrap">–3dBFS</td><td style="white-space:nowrap">10:1</td><td>The room and the RCF speakers — last line of defense before the signal leaves the console entirely, sits higher than the others since everything feeding it should already be well gain-staged</td></tr>
 </table>
 <div class="tip">Notice the pattern: everything upstream (room mics, IEM buses, Lead vocal) sits at <strong>–6dBFS</strong>, giving generous headroom since spikes can come from many independent sources. Main LR sits higher at <strong>–3dBFS</strong> specifically because by the time signal reaches it, gain staging and all the upstream limiters have already done most of the protective work — it's a true last-resort catch, not a primary one.</div>
 <div class="success"><strong>There's actually a genuine fifth layer beyond this table: the RCF speakers themselves have their own built-in limiter, confirmed in RCF's own manual.</strong> This isn't a WING setting at all — it's hardware-level protection inside the ART 312-A, catching things even a correctly-configured Main LR limiter wouldn't (like an amplifier running hot). See the RCF Speakers tab for the full detail.</div>
 
 <div class="sl">Two worked examples — exact steps, on the actual console</div>
 <div class="card"><div class="card-title">Main LR — currently off, still needs doing</div>
-<div class="card-body">
-1. Select <strong>Main LR (M1)</strong><br>
-2. Open <strong>COMP</strong><br>
-3. Turn it ON<br>
-4. <strong>Ratio → 10:1</strong><br>
-5. <strong>Threshold → –3dBFS</strong><br>
-6. <strong>Attack → 1ms</strong><br>
-7. <strong>Hold → 15–20ms</strong><br>
-8. <strong>Release → 100–150ms</strong><br>
-That's the whole limiter — there's no extra step, no separate screen. COMP with these 5 values set is the Main LR limiter.
-</div></div>
+<ul class="step-list"><li><div class="sn">1</div><div class="at">Select <strong>Main LR (M1)</strong></div></li><li><div class="sn">2</div><div class="at">Open <strong>COMP</strong></div></li><li><div class="sn">3</div><div class="at">Turn it ON</div></li><li><div class="sn">4</div><div class="at"><strong>Ratio → 10:1</strong></div></li><li><div class="sn">5</div><div class="at"><strong>Threshold → –3dBFS</strong></div></li><li><div class="sn">6</div><div class="at"><strong>Attack → 1ms</strong></div></li><li><div class="sn">7</div><div class="at"><strong>Hold → 15–20ms</strong></div></li><li><div class="sn">8</div><div class="at"><strong>Release → 100–150ms</strong></div></li></ul>
+<div class="card-body" style="margin-top:8px">That's the whole limiter — there's no extra step, no separate screen. COMP with these 5 values set is the Main LR limiter.</div></div>
 <div class="card"><div class="card-title">Lead vocal (IN1) — already set, shown here as the same pattern</div>
-<div class="card-body">
-1. Select <strong>Lead vocal (IN1)</strong><br>
-2. Open <strong>COMP</strong><br>
-3. Turn it ON<br>
-4. <strong>Ratio → high (10:1+)</strong><br>
-5. <strong>Threshold → –6dBFS</strong><br>
-6. <strong>Attack → fast (~1ms)</strong><br>
-7. <strong>Hold / Release → same short-hold, quick-release shape as the table above</strong><br>
-Exactly the same control, same screen, same idea as Main LR — just a different threshold because it's protecting a single source further upstream, not the whole final mix.
-</div></div>
+<ul class="step-list"><li><div class="sn">1</div><div class="at">Select <strong>Lead vocal (IN1)</strong></div></li><li><div class="sn">2</div><div class="at">Open <strong>COMP</strong></div></li><li><div class="sn">3</div><div class="at">Turn it ON</div></li><li><div class="sn">4</div><div class="at"><strong>Ratio → high (10:1+)</strong></div></li><li><div class="sn">5</div><div class="at"><strong>Threshold → –6dBFS</strong></div></li><li><div class="sn">6</div><div class="at"><strong>Attack → fast (~1ms)</strong></div></li><li><div class="sn">7</div><div class="at"><strong>Hold / Release → same short-hold, quick-release shape as the table above</strong></div></li></ul>
+<div class="card-body" style="margin-top:8px">Exactly the same control, same screen, same idea as Main LR — just a different threshold because it's protecting a single source further upstream, not the whole final mix.</div></div>
 
 <div class="sl">How to actually set one up on WING</div>
 <ul class="step-list">
@@ -2138,10 +2219,10 @@ function consoleMapHTML(){return`
 <tr class="drum-r"><td>IN27</td><td>Tom 1</td><td>35–45 dB</td><td>80Hz</td><td>L30</td><td>–4 dB</td><td>B5–6</td></tr>
 <tr class="drum-r"><td>IN28</td><td>Tom 2</td><td>35–45 dB</td><td>80Hz</td><td>R40</td><td>–4 dB</td><td>B5–6</td></tr>
 <tr class="drum-r"><td>IN29</td><td>Overhead</td><td>25–35 dB</td><td>200Hz</td><td>Centre</td><td>–6 dB</td><td>B5–6</td></tr>
-<tr class="band-r"><td>IN31</td><td>Keys 1 L</td><td>10–15 dB</td><td>40Hz</td><td>Hard L</td><td>–1 dB</td><td>B3–4</td></tr>
-<tr class="band-r"><td>IN32</td><td>Keys 1 R</td><td>10–15 dB</td><td>40Hz</td><td>Hard R</td><td>–1 dB</td><td>B3–4</td></tr>
-<tr class="band-r"><td>IN33</td><td>Keys 2 L</td><td>10–15 dB</td><td>60Hz</td><td>L60</td><td>–3 dB</td><td>B3–4</td></tr>
-<tr class="band-r"><td>IN34</td><td>Keys 2 R</td><td>10–15 dB</td><td>60Hz</td><td>R60</td><td>–3 dB</td><td>B3–4</td></tr>
+<tr class="band-r"><td>IN31</td><td>Keys 1 L</td><td>10–15 dB</td><td>80Hz</td><td>Hard L</td><td>–1 dB</td><td>B3–4</td></tr>
+<tr class="band-r"><td>IN32</td><td>Keys 1 R</td><td>10–15 dB</td><td>80Hz</td><td>Hard R</td><td>–1 dB</td><td>B3–4</td></tr>
+<tr class="band-r"><td>IN33</td><td>Keys 2 L</td><td>10–15 dB</td><td>80Hz</td><td>L60</td><td>–3 dB</td><td>B3–4</td></tr>
+<tr class="band-r"><td>IN34</td><td>Keys 2 R</td><td>10–15 dB</td><td>80Hz</td><td>R60</td><td>–3 dB</td><td>B3–4</td></tr>
 <tr class="room-r"><td>IN35</td><td>Room mic L</td><td>35–45 dB</td><td>100Hz</td><td>L70</td><td>–21 dB send</td><td>Matrix only, never Main</td></tr>
 <tr class="room-r"><td>IN36</td><td>Room mic R</td><td>35–45 dB</td><td>100Hz</td><td>R70</td><td>–21 dB send</td><td>Matrix only, never Main</td></tr>
 <tr class="stem-r"><td>IN37</td><td>Click track</td><td>0–10 dB</td><td>—</td><td>—</td><td>n/a — utility</td><td>B9 only, never Main</td></tr>
